@@ -8,9 +8,10 @@ from .core import RepositoryModel, metrics, validate
 from ._portal_html import PORTAL_HTML
 from ._portal_css import PORTAL_CSS
 from ._portal_js import PORTAL_JS
+from ._portal_polish_js import PORTAL_POLISH_JS
 
 
-_PORTAL_POLISH_CSS = r'''
+_PORTAL_PRESENTATION_CSS = r'''
 .diagram-shell:fullscreen{background:#f3f6fa;padding:16px;overflow:auto}
 .diagram-shell:fullscreen .diagram{min-height:calc(100vh - 96px)}
 .diagram-shell:fullscreen .diagram svg{min-height:calc(100vh - 96px)}
@@ -18,7 +19,7 @@ _PORTAL_POLISH_CSS = r'''
 .diagram-toolbar button:focus-visible,.nav button:focus-visible,.soft:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(36,87,214,.28);outline-offset:2px}
 '''
 
-_PORTAL_POLISH_JS = r'''
+_PORTAL_PRESENTATION_JS = r'''
 function exportCurrentDiagramSvg(){
   if(!diagramState){toast('Open a diagram first');return}
   const host=document.getElementById(diagramState.containerId),svg=host?.querySelector('svg');
@@ -52,8 +53,8 @@ def render_portal(repo: RepositoryModel, output: str | Path = "site") -> Path:
 
     The generated site is self-contained: no external JavaScript, analytics,
     unload/beforeunload handlers, or embedded credentials. It includes a
-    self-contained favicon, Git-aware layout editing, SVG export and fullscreen
-    presentation support.
+    self-contained favicon, Git-aware layout editing, SVG export, fullscreen
+    presentation support and a professional lane-based architecture layout.
     """
     output_dir = Path(output)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -72,9 +73,9 @@ def render_portal(repo: RepositoryModel, output: str | Path = "site") -> Path:
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     page = (
         PORTAL_HTML.replace("__TITLE__", title)
-        .replace("__CSS__", PORTAL_CSS + "\n" + _PORTAL_POLISH_CSS)
+        .replace("__CSS__", PORTAL_CSS + "\n" + _PORTAL_PRESENTATION_CSS)
         .replace("__DATA__", data)
-        .replace("__JS__", PORTAL_JS + "\n" + _PORTAL_POLISH_JS)
+        .replace("__JS__", PORTAL_JS + "\n" + PORTAL_POLISH_JS + "\n" + _PORTAL_PRESENTATION_JS)
     )
 
     # Keep the core diagram toolbar compact, but add professional presentation
