@@ -1,0 +1,53 @@
+rules:
+  - id: EA-PROC-001
+    target: {type: BusinessProcess}
+    require: {properties: [owner, lifecycle, criticality]}
+    severity: error
+    message: Every business process must have an owner, lifecycle and criticality.
+
+  - id: EA-PROC-002
+    target: {type: BusinessProcess}
+    require:
+      relationship:
+        type: Assignment
+        direction: incoming
+        sourceType: BusinessRole
+        min: 1
+    severity: error
+    message: Every business process must have at least one assigned business role.
+
+  - id: EA-PROC-003
+    target: {type: BusinessProcess}
+    when: {properties: {criticality: high}}
+    require:
+      relationship:
+        type: Serving
+        direction: incoming
+        sourceType: ApplicationService
+        min: 1
+    severity: error
+    message: A high-criticality business process must be supported by an application service.
+
+  - id: EA-APP-001
+    target: {type: ApplicationComponent}
+    require: {properties: [owner, lifecycle]}
+    severity: error
+    message: Every application component must have an owner and lifecycle.
+
+  - id: EA-DATA-001
+    target: {type: DataObject}
+    require: {properties: [owner, classification]}
+    severity: error
+    message: Every data object must have an owner and information classification.
+
+  - id: EA-REQ-001
+    target: {type: Requirement}
+    require: {properties: [owner, status]}
+    severity: error
+    message: Every architecture requirement must have an owner and approval status.
+
+  - id: EA-DOC-001
+    target: {type: Representation}
+    require: {properties: [owner, format]}
+    severity: warning
+    message: Every representation should declare an owner and document format.
