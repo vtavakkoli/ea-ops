@@ -87,12 +87,31 @@ layout:
             html = output.read_text(encoding="utf-8")
             self.assertIn("Copy layout YAML", html)
             self.assertIn("Download YAML", html)
+            self.assertIn("Export SVG", html)
+            self.assertIn("Fullscreen", html)
             self.assertIn("Edit view in GitHub", html)
             self.assertIn("openLayoutInGitHub", html)
+            self.assertIn("exportDiagramSvg", html)
+            self.assertIn("toggleDiagramFullscreen", html)
             self.assertIn("pointerdown", html)
             self.assertIn("eventKind", html)
             self.assertIn("Representation", html)
             self.assertIn("localStorage", html)
+
+    def test_portal_has_self_contained_branding_and_no_unload_handler(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            repo = self._repository(root)
+            output = render_portal(repo, root / "site")
+            html = output.read_text(encoding="utf-8")
+            self.assertIn('rel="icon"', html)
+            self.assertIn('data:image/svg+xml', html)
+            self.assertIn('name="theme-color"', html)
+            self.assertIn('property="og:title"', html)
+            self.assertNotIn("addEventListener('unload'", html)
+            self.assertNotIn('addEventListener("unload"', html)
+            self.assertNotIn("onunload=", html)
+            self.assertNotIn("beforeunload", html)
 
 
 if __name__ == "__main__":
