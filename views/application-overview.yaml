@@ -1,0 +1,14 @@
+id: view.service-portal-context
+name: Service Portal Context
+root: app.service-portal
+include:
+  depth: 2
+layout:
+  direction: LR
+  positions:
+    deliverable.portal-release: {x: 330, y: 90}
+    app.service-portal: {x: 610, y: 255}
+    appservice.request-api: {x: 880, y: 255}
+    data.request-record: {x: 610, y: 430}
+    techservice.container-runtime: {x: 330, y: 430}
+    process.handle-service-request: {x: 880, y: 90}
