@@ -4,6 +4,14 @@ PORTAL_HTML = r'''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
+<meta name="theme-color" content="#0b1730">
+<meta name="application-name" content="EA-Ops">
+<meta name="description" content="EA-Ops interactive Enterprise Architecture as Code portal with ArchiMate notation, governed views, architecture catalogs, reports, and Git-native layout editing.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:type" content="website">
+<meta property="og:title" content="EA-Ops Interactive Architecture Portal">
+<meta property="og:description" content="Browse Enterprise Architecture as Code with ArchiMate notation, interactive diagrams, governance, and Git-native layouts.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%236b8cff'/%3E%3Cstop offset='1' stop-color='%232ed2c9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='%230b1730'/%3E%3Crect x='7' y='7' width='50' height='50' rx='12' fill='url(%23g)'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial,sans-serif' font-size='22' font-weight='700' fill='%23071124'%3EEA%3C/text%3E%3C/svg%3E">
 <title>__TITLE__</title>
 <style>__CSS__</style>
 </head>
