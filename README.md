@@ -11,7 +11,7 @@ EA-Ops brings the operating model of modern engineering to Enterprise Architectu
 Traditional EA repositories often separate the model from the change process. EA-Ops deliberately reuses Git for identity, access, review history and approvals, while the framework focuses on architecture semantics and governance.
 
 - **Flexible model** — objects and relationships are data, not hard-coded UI forms.
-- **ArchiMate-ready** — ships with a pragmatic ArchiMate 3.2 starter profile and allows custom metamodel packs.
+- **ArchiMate-ready** — ships with a pragmatic ArchiMate 3.2 profile and allows custom metamodel packs.
 - **Deterministic validation** — IDs, references, relationships and organization policies are testable in CI.
 - **PR-native governance** — architecture changes are reviewed exactly like code changes.
 - **Impact analysis** — traverse the architecture graph from changed objects.
@@ -100,6 +100,49 @@ severity: error
 message: Every business process must have an accountable owner.
 ```
 
+## ArchiMate 3.2 notation-aware portal
+
+The generated repository portal renders architecture elements according to their semantic type instead of drawing every object as a generic rectangle. It includes a built-in **Notation** page so architects can inspect the supported visual vocabulary directly in the generated site.
+
+The profile now covers the element families used by the ArchiMate 3.2 reference cards:
+
+- **Strategy** — Resource, Capability, Value Stream, Course of Action
+- **Business** — Actor, Role, Collaboration, Interface, Process, Function, Interaction, Event, Service, Object, Contract, Representation, Product
+- **Application** — Component, Collaboration, Interface, Function, Interaction, Process, Event, Service, Data Object
+- **Technology & Physical** — Node, Device, System Software, Collaboration, Interface, Path, Communication Network, Function, Process, Interaction, Event, Service, Artifact, Equipment, Facility, Distribution Network, Material
+- **Motivation** — Stakeholder, Driver, Assessment, Goal, Outcome, Principle, Requirement, Constraint, Meaning, Value
+- **Implementation & Migration** — Work Package, Deliverable, Implementation Event, Plateau, Gap
+- **Composite / connector concepts** — Grouping, Location and Junction
+
+Relationship rendering follows the ArchiMate visual grammar for **Composition, Aggregation, Assignment, Realization, Serving, Access, Influence, Triggering, Flow, Specialization and Association**. Junctions are stored by EA-Ops as graph nodes so relationship routing can remain representable in YAML.
+
+Relationship presentation properties can make the notation more precise:
+
+```yaml
+- id: rel.read-customer
+  type: Access
+  source: process.review-customer
+  target: data.customer
+  properties:
+    accessType: read       # access | read | write | read-write
+
+- id: rel.driver-goal
+  type: Influence
+  source: driver.digital-first
+  target: goal.self-service
+  properties:
+    strength: "++"
+
+- id: rel.context
+  type: Association
+  source: capability.service-delivery
+  target: stakeholder.customer
+  properties:
+    directed: true
+```
+
+For Access, EA-Ops keeps the model direction from behavior/active structure to passive structure while the visual arrow reflects `read`, `write` or `read-write` access.
+
 ## Process events and documents
 
 EA-Ops keeps the semantic model ArchiMate-based. A process event is modeled as a `BusinessEvent`; a document-like human-readable form is modeled as a `Representation` rather than inventing a document element type.
@@ -120,7 +163,7 @@ EA-Ops keeps the semantic model ArchiMate-based. A process event is modeled as a
     format: PDF
 ```
 
-`eventKind` is an **EA-Ops presentation extension**, not a new ArchiMate element type. The interactive portal currently recognizes `message`, `timer`, `signal`, `manual`, `error`, and `generic` and renders a distinct event icon while retaining the semantic type `BusinessEvent`.
+`eventKind` is an **EA-Ops presentation extension**, not a new ArchiMate element type. The interactive portal recognizes `message`, `timer`, `signal`, `manual`, and `error` and adds a small visual cue while retaining the semantic event type.
 
 ## Interactive layouts as code
 
@@ -141,11 +184,13 @@ layout:
 The generated portal supports:
 
 - layered automatic layout for process, application, data and technology context;
-- drag-and-drop movement of architecture objects;
+- drag-and-drop movement of architecture objects with relationship rerouting;
+- grid snapping, zoom controls and architect-curated Git positions;
 - automatic browser-local draft persistence while an architect experiments;
 - **Reset to Git** to restore committed coordinates;
-- **Auto layout** to discard positioning and recalculate a clean layout;
-- **Copy layout YAML** and **Download YAML** to persist the refined coordinates through the normal Git/PR workflow.
+- **Auto layout** to recalculate a clean layout;
+- **Copy layout YAML** and **Download YAML** to persist coordinates;
+- **Edit view in GitHub** to open the actual view file and commit the exported layout through the normal Git/PR workflow.
 
 The Git repository remains the source of truth. Browser-local positioning is intentionally a draft until the exported `layout.positions` is committed and reviewed.
 
@@ -167,15 +212,15 @@ steps:
 
 ## Reference architecture
 
-The companion repository [`vtavakkoli/ea-ops-example`](https://github.com/vtavakkoli/ea-ops-example) models the fictional Metroville Digital Permit Service. It demonstrates an event-driven permit journey, document representations, applications, data, technology, motivation, governance, interactive layouts and automated GitHub Pages publishing.
+The companion repository [`vtavakkoli/ea-ops-example`](https://github.com/vtavakkoli/ea-ops-example) models the fictional Metroville Digital Permit Service. It demonstrates an event-driven permit journey, document representations, access modes, influence strength, applications, data, technology, motivation, governance, interactive layouts and automated GitHub Pages publishing.
 
 ## Project status
 
-EA-Ops is an **alpha reference implementation**. The bundled ArchiMate 3.2 profile is intentionally pragmatic and does not yet claim complete normative conformance with the full ArchiMate relationship matrix. The metamodel boundary is designed so additional or future profiles can be versioned independently.
+EA-Ops is an **alpha reference implementation**. The element vocabulary and renderer cover the ArchiMate 3.2 reference-card families, but the bundled validation profile does **not yet claim the complete normative ArchiMate relationship matrix**. The metamodel boundary is designed so stricter and future profiles can be versioned independently.
 
 ## Roadmap
 
-- Complete ArchiMate relationship-rule pack
+- Complete normative ArchiMate relationship-rule pack
 - Semantic model diff for PRs
 - Architecture-owner → reviewer mapping
 - Generated CODEOWNERS / reviewer suggestions
