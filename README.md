@@ -2,7 +2,7 @@
 
 **Git-native Enterprise Architecture Operations — model, validate, review, govern, and publish architecture as code.**
 
-EA-Ops brings the operating model of modern engineering to Enterprise Architecture. Architecture facts live in Git as simple YAML objects and relationships. Deterministic rules validate the model. Pull requests become architecture change requests. `main` represents the approved architecture. The same source generates a searchable portal and architecture-quality report.
+EA-Ops brings the operating model of modern engineering to Enterprise Architecture. Architecture facts live in Git as simple YAML objects and relationships. Deterministic rules validate the model. Pull requests become architecture change requests. `main` represents the approved architecture. The same source generates an interactive architecture portal and architecture-quality report.
 
 > **Model → Validate → Review → Govern → Publish**
 
@@ -15,12 +15,11 @@ Traditional EA repositories often separate the model from the change process. EA
 - **Deterministic validation** — IDs, references, relationships and organization policies are testable in CI.
 - **PR-native governance** — architecture changes are reviewed exactly like code changes.
 - **Impact analysis** — traverse the architecture graph from changed objects.
-- **One source, many views** — generate catalogs, quality reports and a polished static portal.
+- **Interactive architecture views** — browse, drag, refine and export stable diagram layouts.
+- **One source, many views** — generate catalogs, process views, data views, reports and a static portal.
 - **No database required** — clone the repository and the architecture is there.
 
-## v0.1.0
-
-This first release provides the minimum complete operating loop:
+## Operating loop
 
 ```text
 YAML model + relationships
@@ -38,7 +37,7 @@ YAML model + relationships
           │
     ┌─────┴─────┐
     ▼           ▼
-  report      portal
+  report   interactive portal
 ```
 
 ### CLI
@@ -53,7 +52,7 @@ eaops report examples/sample-enterprise -o reports/sample-architecture-report.md
 eaops build examples/sample-enterprise -o site
 ```
 
-Open `site/index.html` to browse the generated demo portal.
+Open `site/index.html` to browse the generated portal.
 
 ## Repository model
 
@@ -64,12 +63,12 @@ model/
 relationships/
   *.yaml              # graph edges
 views/
-  *.yaml               # reusable view definitions
+  *.yaml               # reusable view definitions + optional positions
 rules/
   *.yaml               # organization policy
 ```
 
-A process is just an object:
+A process is an architecture object:
 
 ```yaml
 id: process.customer-onboarding
@@ -101,6 +100,55 @@ severity: error
 message: Every business process must have an accountable owner.
 ```
 
+## Process events and documents
+
+EA-Ops keeps the semantic model ArchiMate-based. A process event is modeled as a `BusinessEvent`; a document-like human-readable form is modeled as a `Representation` rather than inventing a document element type.
+
+```yaml
+- id: event.payment-window-opened
+  type: BusinessEvent
+  name: Payment Window Opened
+  properties:
+    owner: Finance
+    eventKind: timer
+
+- id: representation.decision-letter
+  type: Representation
+  name: Permit Decision Letter
+  properties:
+    owner: Permit Office
+    format: PDF
+```
+
+`eventKind` is an **EA-Ops presentation extension**, not a new ArchiMate element type. The interactive portal currently recognizes `message`, `timer`, `signal`, `manual`, `error`, and `generic` and renders a distinct event icon while retaining the semantic type `BusinessEvent`.
+
+## Interactive layouts as code
+
+Views can keep architect-curated coordinates in Git:
+
+```yaml
+id: view.permit-process
+name: Permit Process
+root: process.submit-permit
+layout:
+  direction: LR
+  positions:
+    event.request-received: {x: 120, y: 235}
+    process.submit-permit: {x: 340, y: 235}
+    representation.application-pdf: {x: 340, y: 540}
+```
+
+The generated portal supports:
+
+- layered automatic layout for process, application, data and technology context;
+- drag-and-drop movement of architecture objects;
+- automatic browser-local draft persistence while an architect experiments;
+- **Reset to Git** to restore committed coordinates;
+- **Auto layout** to discard positioning and recalculate a clean layout;
+- **Copy layout YAML** and **Download YAML** to persist the refined coordinates through the normal Git/PR workflow.
+
+The Git repository remains the source of truth. Browser-local positioning is intentionally a draft until the exported `layout.positions` is committed and reviewed.
+
 ## Pull-request governance
 
 EA-Ops does **not** invent another user-management system. GitHub/GitHub Enterprise controls users, teams, repository access, branch protection and approvals. EA-Ops adds architecture-aware validation and impact information on top.
@@ -117,13 +165,13 @@ steps:
       root: .
 ```
 
-## Demo enterprise
+## Reference architecture
 
-`examples/sample-enterprise` models a small service organization with customer onboarding, procurement and incident management, including business roles, capabilities, applications, information and technology. CI validates it and the Pages workflow turns it into the public demonstration portal.
+The companion repository [`vtavakkoli/ea-ops-example`](https://github.com/vtavakkoli/ea-ops-example) models the fictional Metroville Digital Permit Service. It demonstrates an event-driven permit journey, document representations, applications, data, technology, motivation, governance, interactive layouts and automated GitHub Pages publishing.
 
 ## Project status
 
-EA-Ops v0.1.0 is an **alpha reference implementation**. The bundled ArchiMate 3.2 profile is intentionally pragmatic and does not yet claim complete normative conformance with the full ArchiMate relationship matrix. The metamodel boundary is designed so additional or future profiles can be versioned independently.
+EA-Ops is an **alpha reference implementation**. The bundled ArchiMate 3.2 profile is intentionally pragmatic and does not yet claim complete normative conformance with the full ArchiMate relationship matrix. The metamodel boundary is designed so additional or future profiles can be versioned independently.
 
 ## Roadmap
 
@@ -131,7 +179,7 @@ EA-Ops v0.1.0 is an **alpha reference implementation**. The bundled ArchiMate 3.
 - Semantic model diff for PRs
 - Architecture-owner → reviewer mapping
 - Generated CODEOWNERS / reviewer suggestions
-- Rich graphical views
+- GitHub-assisted layout commit / PR creation
 - Cross-repository model composition
 - Architecture decision records and standards catalog
 - Signed releases and PyPI publication
