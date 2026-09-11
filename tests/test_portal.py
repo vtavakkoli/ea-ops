@@ -3,7 +3,7 @@ import tempfile
 import unittest
 
 from eaops.core import load_repository, validate
-from eaops.portal import render_portal
+from eaops.portal_git import render_portal
 
 
 class PortalTests(unittest.TestCase):
@@ -13,19 +13,62 @@ class PortalTests(unittest.TestCase):
         (root / "views").mkdir()
         (root / "rules").mkdir()
         (root / "eaops.yaml").write_text(
-            """name: Portal Test\nmetamodel:\n  builtin: archimate-3.2\npaths:\n  model: model\n  relationships: relationships\n  views: views\n  rules: rules\n""",
+            """name: Portal Test
+repository:
+  url: https://github.com/example/ea-repo
+  branch: main
+metamodel:
+  builtin: archimate-3.2
+paths:
+  model: model
+  relationships: relationships
+  views: views
+  rules: rules
+""",
             encoding="utf-8",
         )
         (root / "model" / "business.yaml").write_text(
-            """- id: event.message\n  type: BusinessEvent\n  name: Request Received\n  description: Incoming request event.\n  properties: {owner: Service, eventKind: message}\n- id: process.handle\n  type: BusinessProcess\n  name: Handle Request\n  description: Handle the incoming request.\n  properties: {owner: Service, criticality: high}\n- id: object.request\n  type: BusinessObject\n  name: Request\n  description: Business information object.\n  properties: {owner: Service}\n- id: representation.request-pdf\n  type: Representation\n  name: Request PDF\n  description: Human-readable representation.\n  properties: {owner: Service, format: PDF}\n""",
+            """- id: event.message
+  type: BusinessEvent
+  name: Request Received
+  description: Incoming request event.
+  properties: {owner: Service, eventKind: message}
+- id: process.handle
+  type: BusinessProcess
+  name: Handle Request
+  description: Handle the incoming request.
+  properties: {owner: Service, criticality: high}
+- id: object.request
+  type: BusinessObject
+  name: Request
+  description: Business information object.
+  properties: {owner: Service}
+- id: representation.request-pdf
+  type: Representation
+  name: Request PDF
+  description: Human-readable representation.
+  properties: {owner: Service, format: PDF}
+""",
             encoding="utf-8",
         )
         (root / "relationships" / "relationships.yaml").write_text(
-            """- {id: rel.event-process, type: Triggering, source: event.message, target: process.handle}\n- {id: rel.process-doc, type: Access, source: process.handle, target: representation.request-pdf}\n- {id: rel.doc-object, type: Realization, source: representation.request-pdf, target: object.request}\n""",
+            """- {id: rel.event-process, type: Triggering, source: event.message, target: process.handle}
+- {id: rel.process-doc, type: Access, source: process.handle, target: representation.request-pdf}
+- {id: rel.doc-object, type: Realization, source: representation.request-pdf, target: object.request}
+""",
             encoding="utf-8",
         )
         (root / "views" / "process.yaml").write_text(
-            """id: view.process\nname: Process\nroot: process.handle\nlayout:\n  direction: LR\n  positions:\n    event.message: {x: 120, y: 220}\n    process.handle: {x: 360, y: 220}\n    representation.request-pdf: {x: 360, y: 500}\n""",
+            """id: view.process
+name: Process
+root: process.handle
+layout:
+  direction: LR
+  positions:
+    event.message: {x: 120, y: 220}
+    process.handle: {x: 360, y: 220}
+    representation.request-pdf: {x: 360, y: 500}
+""",
             encoding="utf-8",
         )
         return load_repository(root)
@@ -44,6 +87,8 @@ class PortalTests(unittest.TestCase):
             html = output.read_text(encoding="utf-8")
             self.assertIn("Copy layout YAML", html)
             self.assertIn("Download YAML", html)
+            self.assertIn("Edit view in GitHub", html)
+            self.assertIn("openLayoutInGitHub", html)
             self.assertIn("pointerdown", html)
             self.assertIn("eventKind", html)
             self.assertIn("Representation", html)
