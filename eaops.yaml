@@ -1,0 +1,13 @@
+name: EA-Ops Starter Architecture
+version: "1.0"
+repository:
+  # When using this repository as a template, change this URL to your new repository.
+  url: https://github.com/vtavakkoli/ea-ops
+  branch: main
+metamodel:
+  builtin: archimate-3.2
+paths:
+  model: model
+  relationships: relationships
+  views: views
+  rules: rules
