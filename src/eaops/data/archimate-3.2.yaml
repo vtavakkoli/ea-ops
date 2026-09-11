@@ -1,7 +1,7 @@
 name: EA-Ops ArchiMate 3.2 profile
-version: "0.1"
+version: "0.2"
 standard: "ArchiMate 3.2"
-note: "Pragmatic starter profile for EA-Ops v0.1.0; not a complete normative relationship matrix."
+note: "Pragmatic starter profile for EA-Ops; not a complete normative relationship matrix."
 elementTypes:
   Capability: {layer: strategy, category: behavior}
   Resource: {layer: strategy, category: active-structure}
@@ -11,8 +11,10 @@ elementTypes:
   BusinessCollaboration: {layer: business, category: active-structure}
   BusinessProcess: {layer: business, category: behavior}
   BusinessFunction: {layer: business, category: behavior}
+  BusinessEvent: {layer: business, category: behavior}
   BusinessService: {layer: business, category: behavior}
   BusinessObject: {layer: business, category: passive-structure}
+  Representation: {layer: business, category: passive-structure}
   ApplicationComponent: {layer: application, category: active-structure}
   ApplicationService: {layer: application, category: behavior}
   ApplicationFunction: {layer: application, category: behavior}
@@ -36,10 +38,10 @@ relationshipTypes:
   Association: {sourceTypes: ["*"], targetTypes: ["*"]}
   Serving: {sourceTypes: [ApplicationService, ApplicationComponent, TechnologyService, BusinessService], targetTypes: [BusinessProcess, BusinessFunction, BusinessRole, ApplicationComponent, ApplicationFunction]}
   Assignment: {sourceTypes: [BusinessActor, BusinessRole, ApplicationComponent, Node, Device], targetTypes: [BusinessRole, BusinessProcess, BusinessFunction, ApplicationFunction, TechnologyService]}
-  Access: {sourceTypes: [BusinessProcess, BusinessFunction, ApplicationFunction], targetTypes: [BusinessObject, DataObject]}
-  Realization: {sourceTypes: [ApplicationComponent, ApplicationService, TechnologyService, WorkPackage], targetTypes: [BusinessService, ApplicationService, Requirement, Deliverable]}
+  Access: {sourceTypes: [BusinessProcess, BusinessFunction, BusinessEvent, ApplicationFunction], targetTypes: [BusinessObject, DataObject, Representation]}
+  Realization: {sourceTypes: [ApplicationComponent, ApplicationService, TechnologyService, WorkPackage, Representation, DataObject], targetTypes: [BusinessService, ApplicationService, Requirement, Deliverable, BusinessObject]}
   Composition: {sourceTypes: ["*"], targetTypes: ["*"]}
   Aggregation: {sourceTypes: ["*"], targetTypes: ["*"]}
   Flow: {sourceTypes: ["*"], targetTypes: ["*"]}
-  Triggering: {sourceTypes: [BusinessProcess, BusinessFunction, ApplicationFunction], targetTypes: [BusinessProcess, BusinessFunction, ApplicationFunction]}
+  Triggering: {sourceTypes: [BusinessProcess, BusinessFunction, BusinessEvent, ApplicationFunction], targetTypes: [BusinessProcess, BusinessFunction, BusinessEvent, ApplicationFunction]}
   Influence: {sourceTypes: [Stakeholder, Driver, Assessment, Goal, Requirement], targetTypes: [Driver, Goal, Requirement, Constraint]}
