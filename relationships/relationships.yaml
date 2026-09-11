@@ -1,0 +1,23 @@
+- {id: rel.customer-agent, type: Assignment, source: actor.customer, target: role.service-agent}
+- {id: rel.agent-process, type: Assignment, source: role.service-agent, target: process.handle-service-request}
+- {id: rel.request-triggers-process, type: Triggering, source: event.request-received, target: process.handle-service-request}
+- {id: rel.process-realizes-service, type: Realization, source: process.handle-service-request, target: service.request-handling}
+- {id: rel-service-serves-customer, type: Serving, source: service.request-handling, target: actor.customer}
+- {id: rel-process-request, type: Access, source: process.handle-service-request, target: object.service-request, properties: {accessType: read-write}}
+- {id: rel-process-confirmation, type: Access, source: process.handle-service-request, target: representation.request-confirmation, properties: {accessType: write}}
+- {id: rel-confirmation-realizes-request, type: Realization, source: representation.request-confirmation, target: object.service-request}
+
+- {id: rel-portal-api, type: Realization, source: app.service-portal, target: appservice.request-api}
+- {id: rel-api-serves-process, type: Serving, source: appservice.request-api, target: process.handle-service-request}
+- {id: rel-portal-request-data, type: Access, source: app.service-portal, target: data.request-record, properties: {accessType: read-write}}
+- {id: rel-data-realizes-request, type: Realization, source: data.request-record, target: object.service-request}
+
+- {id: rel-node-runtime-service, type: Assignment, source: node.runtime-platform, target: techservice.container-runtime}
+- {id: rel-runtime-serves-portal, type: Serving, source: techservice.container-runtime, target: app.service-portal}
+
+- {id: rel-capability-process, type: Association, source: capability.request-management, target: process.handle-service-request}
+- {id: rel-driver-goal, type: Influence, source: driver.digital-first, target: goal.fast-resolution, properties: {strength: "++"}}
+- {id: rel-requirement-goal, type: Realization, source: requirement.auditability, target: goal.fast-resolution}
+
+- {id: rel-work-deliverable, type: Realization, source: work.improve-service, target: deliverable.portal-release}
+- {id: rel-deliverable-portal, type: Realization, source: deliverable.portal-release, target: app.service-portal}
