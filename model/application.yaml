@@ -1,0 +1,17 @@
+- id: app.service-portal
+  type: ApplicationComponent
+  name: Service Portal
+  description: Application component used by customers and service agents to manage requests.
+  properties: {owner: Digital Product Team, lifecycle: strategic}
+
+- id: appservice.request-api
+  type: ApplicationService
+  name: Request Management API
+  description: Application service that supports request registration and lifecycle operations.
+  properties: {owner: Digital Product Team, lifecycle: strategic}
+
+- id: data.request-record
+  type: DataObject
+  name: Request Record
+  description: Application data containing the persisted service-request record.
+  properties: {owner: Data Management, classification: internal, lifecycle: active}
