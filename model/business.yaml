@@ -1,0 +1,41 @@
+- id: actor.customer
+  type: BusinessActor
+  name: Customer
+  description: Person or organization requesting a service.
+  properties: {owner: Customer Experience, lifecycle: active}
+
+- id: role.service-agent
+  type: BusinessRole
+  name: Service Agent
+  description: Role accountable for reviewing and resolving service requests.
+  properties: {owner: Service Operations, lifecycle: active}
+
+- id: event.request-received
+  type: BusinessEvent
+  name: Request Received
+  description: A new service request has entered the organization.
+  properties: {owner: Service Operations, eventKind: message, lifecycle: active}
+
+- id: process.handle-service-request
+  type: BusinessProcess
+  name: Handle Service Request
+  description: Review, process and resolve an incoming customer service request.
+  properties: {owner: Service Operations, lifecycle: active, criticality: high}
+
+- id: service.request-handling
+  type: BusinessService
+  name: Request Handling Service
+  description: Business service that provides request handling to customers.
+  properties: {owner: Service Operations, lifecycle: active}
+
+- id: object.service-request
+  type: BusinessObject
+  name: Service Request
+  description: Business information describing the customer's request and its status.
+  properties: {owner: Service Operations, classification: internal, lifecycle: active}
+
+- id: representation.request-confirmation
+  type: Representation
+  name: Request Confirmation
+  description: Human-readable confirmation issued when a request is registered.
+  properties: {owner: Service Operations, format: PDF, lifecycle: active}
