@@ -6,7 +6,8 @@ import sys
 
 from . import __version__
 from .core import changed_object_ids, impact, json_summary, load_repository, metrics, validate
-from .render import render_portal, render_report
+from .portal import render_portal
+from .render import render_report
 
 
 def _print_validation(repo) -> int:
