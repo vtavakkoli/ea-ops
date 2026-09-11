@@ -1,0 +1,11 @@
+- id: work.improve-service
+  type: WorkPackage
+  name: Service Experience Improvement
+  description: Work package delivering the first governed digital service-request capability.
+  properties: {owner: Transformation Office, lifecycle: active}
+
+- id: deliverable.portal-release
+  type: Deliverable
+  name: Service Portal Release
+  description: Deployable release of the service portal and supporting request-management capability.
+  properties: {owner: Digital Product Team, lifecycle: planned}
