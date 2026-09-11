@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ea-ops"
-version = "0.1.0"
+version = "0.2.0"
 description = "Git-native Enterprise Architecture Operations: model, validate, review, govern, and publish architecture as code."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -29,3 +29,6 @@ Issues = "https://github.com/vtavakkoli/ea-ops/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/eaops"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/eaops/data" = "eaops/data"
