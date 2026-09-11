@@ -1,8 +1,17 @@
 name: EA-Ops ArchiMate 3.2 profile
-version: "0.3"
+version: "0.4"
 standard: "ArchiMate 3.2"
-note: "EA-Ops notation-complete ArchiMate 3.2 element profile. Relationship validation remains pragmatic and does not yet claim the complete normative relationship matrix."
+note: "EA-Ops ArchiMate 3.2 element and relationship profile. Relationship validation uses the full 3.2 matrix published by the MIT-licensed Archi project and pinned by Git commit/blob identity."
 
+relationshipMatrix:
+  version: "3.2"
+  required: true
+  source: "Archi — ArchiMate Modelling Tool"
+  sourceCommit: "24b1f22d651d05937faa53dd9edf6128d9552dd0"
+  gitBlobSha: "5ec8c5f52a1de982f93838a28dcf1766c5e4f7ca"
+  url: "https://raw.githubusercontent.com/archimatetool/archi/24b1f22d651d05937faa53dd9edf6128d9552dd0/com.archimatetool.model/model/relationships.xml"
+
+# Element vocabulary
 elementTypes:
   # Strategy
   Resource: {layer: strategy, category: active-structure}
@@ -82,6 +91,9 @@ elementTypes:
   Location: {layer: composite, category: composite}
   Junction: {layer: composite, category: relationship-connector}
 
+# Relationship names known to the renderer and model. The exact legal source/target
+# combinations are taken from relationshipMatrix above. sourceTypes/targetTypes are
+# retained as a graceful fallback for custom/offline profiles that do not configure a matrix.
 relationshipTypes:
   Composition: {sourceTypes: ["*"], targetTypes: ["*"]}
   Aggregation: {sourceTypes: ["*"], targetTypes: ["*"]}
