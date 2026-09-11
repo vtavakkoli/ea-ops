@@ -12,8 +12,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
+      - name: Cache ArchiMate relationship matrix
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ea-ops
+          key: archimate-3.2-5ec8c5f52a1de982f93838a28dcf1766c5e4f7ca
       - run: python -m pip install -e .
       - run: python -m unittest discover -s tests -v
-      - run: eaops validate examples/sample-enterprise
-      - run: eaops report examples/sample-enterprise --output reports/sample-architecture-report.md
-      - run: eaops build examples/sample-enterprise --output site
+      - name: Validate clone-and-start template
+        run: eaops validate .
+      - name: Validate bundled sample
+        run: eaops validate examples/sample-enterprise
+      - name: Generate starter report
+        run: eaops report . --output reports/starter-architecture-report.md
+      - name: Build starter portal
+        run: eaops build . --output site
