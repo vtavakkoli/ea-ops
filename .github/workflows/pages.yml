@@ -1,4 +1,4 @@
-name: Publish EA-Ops Demo
+name: EA-Ops Demo Site
 on:
   push:
     branches: [main]
@@ -23,6 +23,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with: {path: _site}
   deploy:
+    if: github.event_name == 'workflow_dispatch'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
