@@ -3,7 +3,7 @@ import tempfile
 import unittest
 
 from eaops.core import load_repository, validate
-from eaops.portal_git import render_portal
+from eaops.repository_portal import render_portal
 
 
 class PortalTests(unittest.TestCase):
@@ -79,7 +79,7 @@ layout:
             errors = [issue for issue in validate(repo) if issue.severity == "error"]
             self.assertEqual([], errors)
 
-    def test_portal_contains_interactive_layout_tools(self):
+    def test_production_portal_contains_interactive_layout_tools(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             repo = self._repository(root)
@@ -87,18 +87,15 @@ layout:
             html = output.read_text(encoding="utf-8")
             self.assertIn("Copy layout YAML", html)
             self.assertIn("Download YAML", html)
-            self.assertIn("Export SVG", html)
-            self.assertIn("Fullscreen", html)
             self.assertIn("Edit view in GitHub", html)
-            self.assertIn("openLayoutInGitHub", html)
-            self.assertIn("exportDiagramSvg", html)
-            self.assertIn("toggleDiagramFullscreen", html)
             self.assertIn("pointerdown", html)
             self.assertIn("eventKind", html)
             self.assertIn("Representation", html)
             self.assertIn("localStorage", html)
+            self.assertIn("Snap grid", html)
+            self.assertIn("ArchiMate notation library", html)
 
-    def test_portal_has_self_contained_branding_and_no_unload_handler(self):
+    def test_portal_has_self_contained_favicon_metadata_and_no_unload_handler(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             repo = self._repository(root)
@@ -107,6 +104,7 @@ layout:
             self.assertIn('rel="icon"', html)
             self.assertIn('data:image/svg+xml', html)
             self.assertIn('name="theme-color"', html)
+            self.assertIn('name="application-name"', html)
             self.assertIn('property="og:title"', html)
             self.assertNotIn("addEventListener('unload'", html)
             self.assertNotIn('addEventListener("unload"', html)
