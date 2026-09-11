@@ -1,0 +1,5 @@
+- id: capability.request-management
+  type: Capability
+  name: Request Management
+  description: Ability to receive, manage and resolve customer service requests consistently.
+  properties: {owner: Service Operations, lifecycle: strategic}
