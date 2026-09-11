@@ -1,0 +1,10 @@
+- id: tech.openshift
+  type: Node
+  name: OpenShift Platform
+  description: Container application platform hosting digital workloads.
+  properties: {owner: Platform Engineering, lifecycle: strategic}
+- id: tech.api-gateway
+  type: TechnologyService
+  name: API Gateway Service
+  description: Managed API exposure, routing and policy enforcement.
+  properties: {owner: Integration Platform, lifecycle: strategic}

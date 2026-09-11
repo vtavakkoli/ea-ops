@@ -1,0 +1,20 @@
+- id: app.crm
+  type: ApplicationComponent
+  name: Customer 360 CRM
+  description: System of record for customer interactions and onboarding workflow.
+  properties: {owner: Digital Platforms, lifecycle: strategic}
+- id: app.erp
+  type: ApplicationComponent
+  name: Core ERP
+  description: Financial, purchasing and supplier transaction platform.
+  properties: {owner: Enterprise Applications, lifecycle: strategic}
+- id: app.itsm
+  type: ApplicationComponent
+  name: Service Management Platform
+  description: Incident, request and change management platform.
+  properties: {owner: IT Operations, lifecycle: strategic}
+- id: data.customer-profile
+  type: DataObject
+  name: Customer Profile
+  description: Canonical customer profile used by CRM and digital channels.
+  properties: {owner: Data Governance, lifecycle: active, classification: confidential}

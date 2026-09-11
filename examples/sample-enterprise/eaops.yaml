@@ -1,0 +1,9 @@
+name: Northstar Services
+version: "1.0"
+metamodel:
+  builtin: archimate-3.2
+paths:
+  model: model
+  relationships: relationships
+  views: views
+  rules: rules

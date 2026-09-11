@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ea-ops"
+version = "0.1.0"
+description = "Git-native Enterprise Architecture Operations: model, validate, review, govern, and publish architecture as code."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "Vahid Tavakkoli"}]
+dependencies = ["PyYAML>=6.0"]
+keywords = ["enterprise-architecture", "architecture-as-code", "archimate", "governance", "gitops"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.scripts]
+eaops = "eaops.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/vtavakkoli/ea-ops"
+Repository = "https://github.com/vtavakkoli/ea-ops"
+Issues = "https://github.com/vtavakkoli/ea-ops/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/eaops"]

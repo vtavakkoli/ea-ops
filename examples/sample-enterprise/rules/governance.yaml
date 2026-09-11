@@ -1,0 +1,17 @@
+rules:
+  - id: EXAMPLE-OWNER-001
+    target: {type: BusinessProcess}
+    require: {properties: [owner]}
+    severity: error
+    message: Every business process must have an accountable owner.
+  - id: EXAMPLE-APP-001
+    target: {type: ApplicationComponent}
+    require: {properties: [owner, lifecycle]}
+    severity: error
+    message: Applications require owner and lifecycle metadata.
+  - id: EXAMPLE-CRIT-001
+    target: {type: BusinessProcess}
+    when: {properties: {criticality: critical}}
+    require: {relationship: {type: Serving, direction: incoming, min: 1}}
+    severity: error
+    message: Critical processes must be supported by an application service or application component.

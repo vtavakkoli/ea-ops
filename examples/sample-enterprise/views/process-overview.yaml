@@ -1,0 +1,6 @@
+id: view.customer-onboarding
+name: Customer Onboarding Overview
+root: process.customer-onboarding
+include:
+  depth: 2
+  types: [BusinessProcess, BusinessRole, BusinessObject, DataObject, ApplicationComponent, TechnologyService, Goal]

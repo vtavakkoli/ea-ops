@@ -1,0 +1,45 @@
+name: EA-Ops ArchiMate 3.2 profile
+version: "0.1"
+standard: "ArchiMate 3.2"
+note: "Pragmatic starter profile for EA-Ops v0.1.0; not a complete normative relationship matrix."
+elementTypes:
+  Capability: {layer: strategy, category: behavior}
+  Resource: {layer: strategy, category: active-structure}
+  ValueStream: {layer: strategy, category: behavior}
+  BusinessActor: {layer: business, category: active-structure}
+  BusinessRole: {layer: business, category: active-structure}
+  BusinessCollaboration: {layer: business, category: active-structure}
+  BusinessProcess: {layer: business, category: behavior}
+  BusinessFunction: {layer: business, category: behavior}
+  BusinessService: {layer: business, category: behavior}
+  BusinessObject: {layer: business, category: passive-structure}
+  ApplicationComponent: {layer: application, category: active-structure}
+  ApplicationService: {layer: application, category: behavior}
+  ApplicationFunction: {layer: application, category: behavior}
+  DataObject: {layer: application, category: passive-structure}
+  Node: {layer: technology, category: active-structure}
+  Device: {layer: technology, category: active-structure}
+  SystemSoftware: {layer: technology, category: active-structure}
+  TechnologyService: {layer: technology, category: behavior}
+  Artifact: {layer: technology, category: passive-structure}
+  Stakeholder: {layer: motivation, category: active-structure}
+  Driver: {layer: motivation, category: motivation}
+  Goal: {layer: motivation, category: motivation}
+  Requirement: {layer: motivation, category: motivation}
+  Constraint: {layer: motivation, category: motivation}
+  Assessment: {layer: motivation, category: motivation}
+  WorkPackage: {layer: implementation, category: behavior}
+  Deliverable: {layer: implementation, category: passive-structure}
+  Plateau: {layer: implementation, category: structure}
+  Gap: {layer: implementation, category: structure}
+relationshipTypes:
+  Association: {sourceTypes: ["*"], targetTypes: ["*"]}
+  Serving: {sourceTypes: [ApplicationService, ApplicationComponent, TechnologyService, BusinessService], targetTypes: [BusinessProcess, BusinessFunction, BusinessRole, ApplicationComponent, ApplicationFunction]}
+  Assignment: {sourceTypes: [BusinessActor, BusinessRole, ApplicationComponent, Node, Device], targetTypes: [BusinessRole, BusinessProcess, BusinessFunction, ApplicationFunction, TechnologyService]}
+  Access: {sourceTypes: [BusinessProcess, BusinessFunction, ApplicationFunction], targetTypes: [BusinessObject, DataObject]}
+  Realization: {sourceTypes: [ApplicationComponent, ApplicationService, TechnologyService, WorkPackage], targetTypes: [BusinessService, ApplicationService, Requirement, Deliverable]}
+  Composition: {sourceTypes: ["*"], targetTypes: ["*"]}
+  Aggregation: {sourceTypes: ["*"], targetTypes: ["*"]}
+  Flow: {sourceTypes: ["*"], targetTypes: ["*"]}
+  Triggering: {sourceTypes: [BusinessProcess, BusinessFunction, ApplicationFunction], targetTypes: [BusinessProcess, BusinessFunction, ApplicationFunction]}
+  Influence: {sourceTypes: [Stakeholder, Driver, Assessment, Goal, Requirement], targetTypes: [Driver, Goal, Requirement, Constraint]}

@@ -1,0 +1,30 @@
+- id: capability.customer-service
+  type: Capability
+  name: Customer Service Management
+  description: Ability to acquire, onboard and serve customers consistently.
+  properties: {owner: Strategy Office, lifecycle: strategic}
+- id: process.customer-onboarding
+  type: BusinessProcess
+  name: Customer Onboarding
+  description: Validate a new customer, create the master record and activate digital service access.
+  properties: {owner: Customer Operations, lifecycle: active, criticality: critical}
+- id: process.incident-management
+  type: BusinessProcess
+  name: Incident Management
+  description: Restore normal service after operational incidents and coordinate communication.
+  properties: {owner: IT Operations, lifecycle: active, criticality: high}
+- id: process.procurement
+  type: BusinessProcess
+  name: Procurement
+  description: Request, approve and purchase goods and services.
+  properties: {owner: Finance & Procurement, lifecycle: active, criticality: medium}
+- id: role.customer-agent
+  type: BusinessRole
+  name: Customer Service Agent
+  description: Handles onboarding cases and customer communication.
+  properties: {owner: Customer Operations, lifecycle: active}
+- id: object.customer
+  type: BusinessObject
+  name: Customer
+  description: Business representation of a customer relationship.
+  properties: {owner: Data Governance, lifecycle: active}

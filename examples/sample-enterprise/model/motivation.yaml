@@ -1,0 +1,10 @@
+- id: goal.fast-onboarding
+  type: Goal
+  name: Onboard customers within one business day
+  description: Reduce onboarding lead time while preserving control quality.
+  properties: {owner: Customer Operations, lifecycle: active}
+- id: requirement.auditability
+  type: Requirement
+  name: Architecture changes are auditable
+  description: Architecture decisions and model changes must preserve review and approval history.
+  properties: {owner: Enterprise Architecture, lifecycle: active}
