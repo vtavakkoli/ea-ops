@@ -1,0 +1,14 @@
+id: view.service-request-process
+name: Service Request Process
+root: process.handle-service-request
+include:
+  depth: 3
+layout:
+  direction: LR
+  positions:
+    role.service-agent: {x: 610, y: 90}
+    event.request-received: {x: 320, y: 255}
+    process.handle-service-request: {x: 610, y: 255}
+    appservice.request-api: {x: 610, y: 430}
+    object.service-request: {x: 500, y: 605}
+    representation.request-confirmation: {x: 760, y: 605}
