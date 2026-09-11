@@ -1,0 +1,11 @@
+- id: node.runtime-platform
+  type: Node
+  name: Runtime Platform
+  description: Managed execution environment that hosts the service portal workload.
+  properties: {owner: Platform Engineering, lifecycle: strategic}
+
+- id: techservice.container-runtime
+  type: TechnologyService
+  name: Container Runtime Service
+  description: Technology service providing managed execution, scaling and workload isolation.
+  properties: {owner: Platform Engineering, lifecycle: strategic}
