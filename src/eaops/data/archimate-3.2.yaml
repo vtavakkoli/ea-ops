@@ -1,47 +1,96 @@
 name: EA-Ops ArchiMate 3.2 profile
-version: "0.2"
+version: "0.3"
 standard: "ArchiMate 3.2"
-note: "Pragmatic starter profile for EA-Ops; not a complete normative relationship matrix."
+note: "EA-Ops notation-complete ArchiMate 3.2 element profile. Relationship validation remains pragmatic and does not yet claim the complete normative relationship matrix."
+
 elementTypes:
-  Capability: {layer: strategy, category: behavior}
+  # Strategy
   Resource: {layer: strategy, category: active-structure}
+  Capability: {layer: strategy, category: behavior}
   ValueStream: {layer: strategy, category: behavior}
+  CourseOfAction: {layer: strategy, category: behavior}
+
+  # Business
   BusinessActor: {layer: business, category: active-structure}
   BusinessRole: {layer: business, category: active-structure}
   BusinessCollaboration: {layer: business, category: active-structure}
+  BusinessInterface: {layer: business, category: active-structure}
   BusinessProcess: {layer: business, category: behavior}
   BusinessFunction: {layer: business, category: behavior}
+  BusinessInteraction: {layer: business, category: behavior}
   BusinessEvent: {layer: business, category: behavior}
   BusinessService: {layer: business, category: behavior}
   BusinessObject: {layer: business, category: passive-structure}
+  Contract: {layer: business, category: passive-structure}
   Representation: {layer: business, category: passive-structure}
+  Product: {layer: business, category: passive-structure}
+
+  # Application
   ApplicationComponent: {layer: application, category: active-structure}
-  ApplicationService: {layer: application, category: behavior}
+  ApplicationCollaboration: {layer: application, category: active-structure}
+  ApplicationInterface: {layer: application, category: active-structure}
   ApplicationFunction: {layer: application, category: behavior}
+  ApplicationInteraction: {layer: application, category: behavior}
+  ApplicationProcess: {layer: application, category: behavior}
+  ApplicationEvent: {layer: application, category: behavior}
+  ApplicationService: {layer: application, category: behavior}
   DataObject: {layer: application, category: passive-structure}
+
+  # Technology
   Node: {layer: technology, category: active-structure}
   Device: {layer: technology, category: active-structure}
   SystemSoftware: {layer: technology, category: active-structure}
+  TechnologyCollaboration: {layer: technology, category: active-structure}
+  TechnologyInterface: {layer: technology, category: active-structure}
+  Path: {layer: technology, category: active-structure}
+  CommunicationNetwork: {layer: technology, category: active-structure}
+  TechnologyFunction: {layer: technology, category: behavior}
+  TechnologyProcess: {layer: technology, category: behavior}
+  TechnologyInteraction: {layer: technology, category: behavior}
+  TechnologyEvent: {layer: technology, category: behavior}
   TechnologyService: {layer: technology, category: behavior}
   Artifact: {layer: technology, category: passive-structure}
+
+  # Physical
+  Equipment: {layer: physical, category: active-structure}
+  Facility: {layer: physical, category: active-structure}
+  DistributionNetwork: {layer: physical, category: active-structure}
+  Material: {layer: physical, category: passive-structure}
+
+  # Motivation
   Stakeholder: {layer: motivation, category: active-structure}
   Driver: {layer: motivation, category: motivation}
+  Assessment: {layer: motivation, category: motivation}
   Goal: {layer: motivation, category: motivation}
+  Outcome: {layer: motivation, category: motivation}
+  Principle: {layer: motivation, category: motivation}
   Requirement: {layer: motivation, category: motivation}
   Constraint: {layer: motivation, category: motivation}
-  Assessment: {layer: motivation, category: motivation}
+  Meaning: {layer: motivation, category: motivation}
+  Value: {layer: motivation, category: motivation}
+
+  # Implementation & Migration
   WorkPackage: {layer: implementation, category: behavior}
   Deliverable: {layer: implementation, category: passive-structure}
+  ImplementationEvent: {layer: implementation, category: behavior}
   Plateau: {layer: implementation, category: structure}
   Gap: {layer: implementation, category: structure}
+
+  # Composite / connector concepts. Junction is stored as a graph node by EA-Ops
+  # so that relationship-to-relationship routing remains representable in YAML.
+  Grouping: {layer: composite, category: composite}
+  Location: {layer: composite, category: composite}
+  Junction: {layer: composite, category: relationship-connector}
+
 relationshipTypes:
-  Association: {sourceTypes: ["*"], targetTypes: ["*"]}
-  Serving: {sourceTypes: [ApplicationService, ApplicationComponent, TechnologyService, BusinessService], targetTypes: [BusinessProcess, BusinessFunction, BusinessRole, ApplicationComponent, ApplicationFunction]}
-  Assignment: {sourceTypes: [BusinessActor, BusinessRole, ApplicationComponent, Node, Device], targetTypes: [BusinessRole, BusinessProcess, BusinessFunction, ApplicationFunction, TechnologyService]}
-  Access: {sourceTypes: [BusinessProcess, BusinessFunction, BusinessEvent, ApplicationFunction], targetTypes: [BusinessObject, DataObject, Representation]}
-  Realization: {sourceTypes: [ApplicationComponent, ApplicationService, TechnologyService, WorkPackage, Representation, DataObject], targetTypes: [BusinessService, ApplicationService, Requirement, Deliverable, BusinessObject]}
   Composition: {sourceTypes: ["*"], targetTypes: ["*"]}
   Aggregation: {sourceTypes: ["*"], targetTypes: ["*"]}
+  Assignment: {sourceTypes: [BusinessActor, BusinessRole, BusinessCollaboration, ApplicationComponent, ApplicationCollaboration, Node, Device, SystemSoftware, TechnologyCollaboration, Equipment, Facility], targetTypes: ["*"]}
+  Realization: {sourceTypes: ["*"], targetTypes: ["*"]}
+  Serving: {sourceTypes: [BusinessService, ApplicationService, ApplicationComponent, TechnologyService], targetTypes: ["*"]}
+  Access: {sourceTypes: [BusinessProcess, BusinessFunction, BusinessInteraction, BusinessEvent, BusinessService, ApplicationComponent, ApplicationFunction, ApplicationInteraction, ApplicationProcess, ApplicationEvent, ApplicationService, TechnologyFunction, TechnologyInteraction, TechnologyProcess, TechnologyEvent, TechnologyService], targetTypes: [BusinessObject, Contract, Representation, Product, DataObject, Artifact, Material]}
+  Influence: {sourceTypes: ["*"], targetTypes: [Stakeholder, Driver, Assessment, Goal, Outcome, Principle, Requirement, Constraint, Meaning, Value]}
+  Triggering: {sourceTypes: [BusinessProcess, BusinessFunction, BusinessInteraction, BusinessEvent, ApplicationFunction, ApplicationInteraction, ApplicationProcess, ApplicationEvent, TechnologyFunction, TechnologyInteraction, TechnologyProcess, TechnologyEvent, WorkPackage, ImplementationEvent, Junction], targetTypes: [BusinessProcess, BusinessFunction, BusinessInteraction, BusinessEvent, ApplicationFunction, ApplicationInteraction, ApplicationProcess, ApplicationEvent, TechnologyFunction, TechnologyInteraction, TechnologyProcess, TechnologyEvent, WorkPackage, ImplementationEvent, Junction]}
   Flow: {sourceTypes: ["*"], targetTypes: ["*"]}
-  Triggering: {sourceTypes: [BusinessProcess, BusinessFunction, BusinessEvent, ApplicationFunction], targetTypes: [BusinessProcess, BusinessFunction, BusinessEvent, ApplicationFunction]}
-  Influence: {sourceTypes: [Stakeholder, Driver, Assessment, Goal, Requirement], targetTypes: [Driver, Goal, Requirement, Constraint]}
+  Specialization: {sourceTypes: ["*"], targetTypes: ["*"]}
+  Association: {sourceTypes: ["*"], targetTypes: ["*"]}
