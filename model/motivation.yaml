@@ -1,0 +1,17 @@
+- id: driver.digital-first
+  type: Driver
+  name: Digital-First Service
+  description: Demand for simple, traceable and fast digital service interactions.
+  properties: {owner: Enterprise Architecture, lifecycle: active}
+
+- id: goal.fast-resolution
+  type: Goal
+  name: Fast Request Resolution
+  description: Reduce the elapsed time from request receipt to a clear resolution.
+  properties: {owner: Service Operations, lifecycle: active}
+
+- id: requirement.auditability
+  type: Requirement
+  name: End-to-End Auditability
+  description: Every material request state change must be traceable to an actor and timestamp.
+  properties: {owner: Enterprise Architecture, status: approved, lifecycle: active}
