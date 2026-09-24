@@ -6,7 +6,10 @@ import shutil
 
 import yaml
 
-from benchmarks.common import write_json
+try:
+    from benchmarks.common import write_json
+except ModuleNotFoundError:  # direct script execution: python benchmarks/inject_faults.py
+    from common import write_json
 
 
 FAULTS = (
