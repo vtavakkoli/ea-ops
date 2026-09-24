@@ -112,8 +112,8 @@ def _relationship_matrix(repo: RepositoryModel) -> tuple[dict[tuple[str, str], f
     if not spec:
         return None, None
     try:
-        version, matrix = load_relationship_matrix(spec)
-        return matrix, version
+        _, matrix = load_relationship_matrix(spec)
+        return matrix, None
     except RelationshipMatrixError as exc:
         return None, str(exc)
 
