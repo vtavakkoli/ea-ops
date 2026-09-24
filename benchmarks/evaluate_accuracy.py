@@ -5,7 +5,10 @@ import json
 from pathlib import Path
 
 from eaops.core import load_repository, validate
-from benchmarks.common import write_csv
+try:
+    from benchmarks.common import write_csv
+except ModuleNotFoundError:  # direct script execution
+    from common import write_csv
 
 
 def evaluate(root: str | Path) -> tuple[list[dict], dict[str, float | int]]:

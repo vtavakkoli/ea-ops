@@ -7,7 +7,10 @@ from pathlib import Path
 import platform
 import sys
 
-from benchmarks.common import write_json
+try:
+    from benchmarks.common import write_json
+except ModuleNotFoundError:  # direct script execution
+    from common import write_json
 
 
 def _cpu() -> str:

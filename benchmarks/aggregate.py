@@ -7,7 +7,10 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 
-from benchmarks.common import summary, write_csv, write_json
+try:
+    from benchmarks.common import summary, write_csv, write_json
+except ModuleNotFoundError:  # direct script execution
+    from common import summary, write_csv, write_json
 
 
 def _read_csv(path: Path) -> list[dict]:
