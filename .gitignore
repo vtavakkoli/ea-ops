@@ -6,3 +6,10 @@ dist/
 build/
 site/
 reports/
+
+# Research benchmark outputs
+/generated/
+/results/raw/
+/results/summary/
+/results/figures/
+/results/environment*.json

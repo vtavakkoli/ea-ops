@@ -292,6 +292,22 @@ def validate(repo: RepositoryModel) -> list[Issue]:
                 if max_count is not None and len(related) > int(max_count):
                     relation_name = rel_req.get("type") or "matching"
                     issues.append(Issue(severity, rule_id, rule.get("message") or f"Allows at most {max_count} {relation_name} relationship(s)", oid))
+            allowed_properties = (rule.get("allow") or {}).get("properties") or {}
+            for prop, allowed_values in allowed_properties.items():
+                value = (obj.get("properties") or {}).get(prop)
+                if value is None:
+                    continue
+                allowed = {allowed_values} if isinstance(allowed_values, str) else set(allowed_values)
+                if value not in allowed:
+                    issues.append(
+                        Issue(
+                            severity,
+                            rule_id,
+                            rule.get("message")
+                            or f"Property '{prop}' must be one of: {', '.join(sorted(str(v) for v in allowed))}",
+                            oid,
+                        )
+                    )
     return issues
 
 
