@@ -8,7 +8,8 @@ import sys
 import yaml
 
 from benchmarks.generate_model import generate_repository
-from benchmarks.inject_faults import inject_fault
+from benchmarks.inject_faults import FAULTS, inject_fault
+from eaops.core import load_repository, validate
 
 
 class BenchmarkHarnessTests(unittest.TestCase):
@@ -24,6 +25,22 @@ class BenchmarkHarnessTests(unittest.TestCase):
             truth = json.loads((faulty / "ground_truth.json").read_text(encoding="utf-8"))
             self.assertEqual("missing_owner", truth["fault_type"])
             self.assertEqual("BENCH-APP-REQUIRED", truth["expected_errors"][0]["code"])
+
+    def test_fault_catalog_matches_validator_ground_truth(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = generate_repository(Path(tmp) / "clean", objects=30, relationships=60, seed=11)
+            clean_errors = {i.code for i in validate(load_repository(root)) if i.severity == "error"}
+            self.assertEqual(set(), clean_errors)
+            for fault in FAULTS:
+                faulty = inject_fault(root, Path(tmp) / f"fault-{fault}", fault)
+                truth = json.loads((faulty / "ground_truth.json").read_text(encoding="utf-8"))
+                expected = {(x["code"], x.get("object_id")) for x in truth["expected_errors"]}
+                actual = {
+                    (i.code, i.object_id)
+                    for i in validate(load_repository(faulty))
+                    if i.severity == "error"
+                }
+                self.assertEqual(expected, actual, msg=fault)
 
     def test_research_scripts_support_direct_execution(self):
         repo_root = Path(__file__).resolve().parents[1]
