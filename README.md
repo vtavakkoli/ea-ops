@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/assets/ea-ops.svg" width="80" height="80" alt="EA Ops connected architecture icon"></p>
+
 # EA-Ops
 
 **Git-native Enterprise Architecture Operations — model, validate, review, govern, and publish architecture as code.**
@@ -5,6 +7,26 @@
 EA-Ops brings the operating model of modern engineering to Enterprise Architecture. Architecture facts live in Git as simple YAML objects and relationships. Deterministic rules validate the model. Pull requests become architecture change requests. `main` represents the approved architecture. The same source generates an interactive architecture portal and architecture-quality report.
 
 > **Model → Validate → Review → Govern → Publish**
+
+## A workspace for everyday architecture
+
+**Python 3.10+ · PyYAML · YAML models · Vanilla JavaScript · SVG · GitHub Actions**
+
+Find the system you need, see who owns it, inspect its dependencies, and bring a clear shortlist to your next architecture review.
+
+| Everyday task | Where to start |
+| --- | --- |
+| Find a system or its owner | **Catalog**: search names, IDs, descriptions, and owners |
+| Prepare a review | Filter by layer, owner, favorites, or high / critical assets |
+| Return to your work | Star objects and use **Recently opened** on the overview |
+| Share architecture context | Open an object and choose **Copy direct link** |
+| Take a shortlist into a meeting | **Export CSV** exports the current catalog filters |
+| Check model health | **Review priorities** and **Governance** |
+| Inspect connections | **Explore dependencies**, then choose one to three hops |
+
+Press **/** to focus search, type a query, and press **Enter**. The portal runs without a frontend build step or external JavaScript services. Favorites and recent items stay in this browser; reviewed YAML in Git remains the shared source of truth.
+
+[Read the daily workflow guide](docs/daily-workflow.md).
 
 ## Why EA-Ops
 
@@ -216,7 +238,7 @@ The companion repository [`vtavakkoli/ea-ops-example`](https://github.com/vtavak
 
 ## Project status
 
-EA-Ops is an **alpha reference implementation**. The element vocabulary and renderer cover the ArchiMate 3.2 reference-card families, but the bundled validation profile does **not yet claim the complete normative ArchiMate relationship matrix**. The metamodel boundary is designed so stricter and future profiles can be versioned independently.
+EA-Ops is an **alpha reference implementation**. The built-in profile checks relationship combinations against the pinned Archi 3.2 relationship matrix. This is not a claim of Open Group certification or complete conformance to every normative ArchiMate constraint. The metamodel boundary allows stricter and future profiles to be versioned independently.
 
 ## Roadmap
 

@@ -9,6 +9,7 @@ from ._portal_html import PORTAL_HTML
 from ._portal_css import PORTAL_CSS
 from ._portal_js import PORTAL_JS
 from ._portal_polish_js import PORTAL_POLISH_JS
+from ._workspace import WORKSPACE_CSS, WORKSPACE_JS
 
 
 _PORTAL_PRESENTATION_CSS = r'''
@@ -73,9 +74,9 @@ def render_portal(repo: RepositoryModel, output: str | Path = "site") -> Path:
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     page = (
         PORTAL_HTML.replace("__TITLE__", title)
-        .replace("__CSS__", PORTAL_CSS + "\n" + _PORTAL_PRESENTATION_CSS)
+        .replace("__CSS__", PORTAL_CSS + "\n" + _PORTAL_PRESENTATION_CSS + "\n" + WORKSPACE_CSS)
         .replace("__DATA__", data)
-        .replace("__JS__", PORTAL_JS + "\n" + PORTAL_POLISH_JS + "\n" + _PORTAL_PRESENTATION_JS)
+        .replace("__JS__", PORTAL_JS + "\n" + PORTAL_POLISH_JS + "\n" + _PORTAL_PRESENTATION_JS + "\n" + WORKSPACE_JS)
     )
 
     # Keep the core diagram toolbar compact, but add professional presentation

@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add a daily architecture catalog with combined filters, favorites, recent items, direct links, and safe CSV export.
+- Refresh the dashboard, shared SVG identity, keyboard navigation, and responsive workspace.
+- Add practical local setup, review, sharing, and persistence documentation.
+- Fix a loaded ArchiMate matrix version being incorrectly reported as a validation error.
+
 ## 0.1.0 — 2026-09-11
 
 First public alpha of EA-Ops.
