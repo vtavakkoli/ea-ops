@@ -254,3 +254,14 @@ EA-Ops is an **alpha reference implementation**. The built-in profile checks rel
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE).
+
+
+## Research evaluation and reproducibility
+
+EA-Ops includes a publication-oriented benchmark harness under [`benchmarks/`](benchmarks/). It evaluates validation accuracy, controlled fault detection, graph-impact analysis, runtime, peak memory, report generation, and portal generation over deterministic synthetic architectures from **100 to 100,000 objects**.
+
+The canonical experiment is [`.github/workflows/research-evaluation.yml`](.github/workflows/research-evaluation.yml). Run it manually with **Actions → IEEE Research Evaluation → Run workflow**, or push a tag matching `research-*`. The workflow stores raw CSV measurements, runner metadata, publication-ready summary tables, and PDF figures as GitHub Actions artifacts. A `research-*` tag also attaches the reproducibility bundle to the corresponding GitHub Release.
+
+Fault injection and ground-truth generation are deliberately separated from the EA-Ops validator implementation. Generated models and raw results are not committed; they are deterministically regenerated from documented seeds.
+
+See [benchmarks/README.md](benchmarks/README.md) for the methodology, metrics, cloud-runner limitations, and local reproduction commands.

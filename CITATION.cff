@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use EA-Ops in research, please cite the software release and the associated article when available."
+title: "EA-Ops: Git-native Enterprise Architecture Operations"
+type: software
+authors:
+  - family-names: Tavakkoli
+    given-names: Vahid
+version: 0.2.0
+license: Apache-2.0
+repository-code: "https://github.com/vtavakkoli/ea-ops"
+url: "https://vtavakkoli.github.io/ea-ops/"
+keywords:
+  - enterprise architecture
+  - architecture as code
+  - ArchiMate
+  - GitOps
+  - governance as code
