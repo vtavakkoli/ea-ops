@@ -10,5 +10,6 @@
     "benchmarks/generate_model.py": "b1f255183066ec1c34dc97effc976cee43a300dedf90f2c1a6aff4d3059d9460"
   },
   "measurement_note": "Final revision source hashes. During the experiment, a max_depth type guard was tightened (all performance calls use max_depth=None) and package version metadata changed from 0.2.0 to 0.3.0. Performance-path logic and the safe YAML loader were unchanged. The initial graph source variant is separately identified.",
-  "initial_graph_variant_sha256": "47a6bc0b5250b7a3b67a537b9c9657ec22b14532b0b27a6ea7441cfebee8db5d"
+  "initial_graph_variant_sha256": "47a6bc0b5250b7a3b67a537b9c9657ec22b14532b0b27a6ea7441cfebee8db5d",
+  "post_benchmark_change": "Access-mode normalization was added after the measurements; it affects the optional dependency policy. The preserved performance experiment uses the unchanged structural profile. The ten scenario CSV outputs remain byte-identical."
 }

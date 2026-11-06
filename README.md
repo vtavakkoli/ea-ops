@@ -271,3 +271,7 @@ See [benchmarks/README.md](benchmarks/README.md) for the methodology, metrics, c
 The 0.3.0 revision candidate adds indexed report aggregation, adjacency-based structural impact, typed/directional/depth-bounded queries, and semantic snapshot differences. [Impact policy](docs/impact-policy.md) defines the heuristics and their limits. [Revision evidence](research/revision/README.md) separates the original hosted experiment from the new local measurements.
 
 Eight injected checks over 30 seeded topology variants are exact-match regression tests, not real-world detection accuracy. Graph oracle agreement establishes implementation correctness under a declared policy. EA-Ops validates explicit relationship compatibility; it does not compute ArchiMate derivations or establish full standards conformance or organizational governance effectiveness.
+
+## Preprint and planned organizational evaluation
+
+The associated preprint is available under DOI [10.48550/arXiv.2609.30593](https://doi.org/10.48550/arXiv.2609.30593). EA-Ops is an initial open-source contribution with reproducible implementation and benchmark evidence. An evaluation by the City of Vienna, Wien Digital (MA 01), is planned as future work; no completed municipal evaluation is claimed.

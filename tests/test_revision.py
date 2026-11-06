@@ -35,6 +35,29 @@ class ImpactTests(unittest.TestCase):
         self.assertEqual({"writer", "data", "process"}, set(impact(repo, {"writer"}, profile="dependency")["impacted"]))
         self.assertEqual({"part", "platform", "app", "process"}, set(impact(repo, {"part"}, profile="dependency")["impacted"]))
 
+    def test_access_aliases_preserve_read_and_write_dependencies(self):
+        for mode in ("read-write", "readwrite", "read/write", "ReadWrite", "READ/WRITE"):
+            with self.subTest(mode=mode):
+                repo = fixture()
+                repo.relationships["2"]["properties"] = {"accessType": mode}
+                self.assertEqual({"data", "process"}, set(impact(repo, {"data"}, profile="dependency")["impacted"]))
+                self.assertEqual({"data", "process"}, set(impact(repo, {"process"}, profile="dependency")["impacted"]))
+
+    def test_access_case_fallback_and_precedence_match_the_portal(self):
+        for properties, from_data, from_process in (
+            ({"accessType": "Read"}, {"data", "process"}, {"process"}),
+            ({"accessType": "WRITE"}, {"data"}, {"data", "process"}),
+            ({"access": "readwrite"}, {"data", "process"}, {"data", "process"}),
+            ({"accessType": "", "access": "Read"}, {"data", "process"}, {"process"}),
+            ({"accessType": "Write", "access": "Read"}, {"data"}, {"data", "process"}),
+            ({}, {"data", "process"}, {"data", "process"}),
+        ):
+            with self.subTest(properties=properties):
+                repo = fixture()
+                repo.relationships["2"]["properties"] = properties
+                self.assertEqual(from_data, set(impact(repo, {"data"}, profile="dependency")["impacted"]))
+                self.assertEqual(from_process, set(impact(repo, {"process"}, profile="dependency")["impacted"]))
+
     def test_depth_filter_cycle_and_explanation(self):
         repo = fixture()
         result = impact(repo, {"platform"}, profile="dependency", max_depth=1, explain=True)

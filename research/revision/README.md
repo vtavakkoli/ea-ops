@@ -1,6 +1,6 @@
 # IEEE Access revision evidence
 
-This is an engineering revision candidate. It does not imply acceptance, practitioner validation, an archival DOI, or production deployment.
+EA-Ops is an initial open-source engineering contribution, accompanied by a preprint with DOI [10.48550/arXiv.2609.30593](https://doi.org/10.48550/arXiv.2609.30593). The present evaluation covers the implementation and reproducible benchmarks; organizational testing is planned as future work.
 
 ## What is implemented
 
@@ -28,14 +28,18 @@ python -m benchmarks.publication_assets --original research/original/raw \
 
 Original fault trials use seeds 1–30. Random topology varies; mutation fixtures/sites and detector expectations remain fixed. Report eight checks across 30 topology variants, not 240 independent real-world defects. Undirected oracle agreement checks connected-component implementation; typed oracle agreement checks the declared policy, not business-impact validity.
 
-## Remaining external evidence
+## Scope and planned evaluation
 
-1. Complete an archival deposit for the original evaluated commits and the revised source/data; record the issued DOI(s). `.zenodo.json`, `CITATION.cff`, and `ARCHIVAL.md` prepare this, but no DOI exists yet.
-2. Conduct genuine practitioner sessions if claiming usability, effort reduction, or governance value. `practitioner-protocol.md` and the empty CSV template support collection; no responses have been invented.
-3. Authors should check the clean manuscript, highlighted PDF, and point-by-point response before resubmission. Do not describe the package as fully ready while external evidence remains outstanding.
+An evaluation by the City of Vienna, Wien Digital (Municipal Department 01, MA 01), is planned. It has not yet been performed and is future work, rather than a prerequisite imposed on the bounded implementation and benchmark claims in this initial article. Author Vahid Tavakkoli serves as a Senior Enterprise Architect in that department; this provides professional context and is not a substitute for independent evaluation.
+
+The existing arXiv preprint DOI is **10.48550/arXiv.2609.30593**. Source, data and workflow provenance are public and pinned to exact commits/run IDs. A separate DOI for a versioned software/data deposit is a distinct preservation option; the preprint DOI must not be mislabeled as archiving the software. `ARCHIVAL.md` explains this response to the reviewer's preservation request.
+
+The manuscript and reviewer response retain the distinction between a planned City evaluation and completed technical experiments. No participant results, production deployment, or measured municipal benefit are claimed. The supplied practitioner protocol and empty template support the future evaluation.
 
 ## Observed revision outcome
 
 The complete local 100,000-object / 200,000-relationship protocol finished: validation median 118.783 s, undirected impact median 1066.254 ms, report median 1.995 s, portal median 2.898 s, maximum process peak RSS 1461.9 MiB, total benchmark child elapsed 484.3 s (generation excluded). These are three-repetition local measurements, not a replacement for the original 30-repetition hosted protocol. Legacy CSV `_mb` names represent MiB (KiB / 1024 on Linux).
 
 Source variants and final file digests are recorded in `measured-source-sha256.json`; a depth-argument type guard and package-version metadata changed during collection without changing the timed default paths.
+
+The follow-up patch normalizes Access-mode aliases and the legacy `access` property consistently with the portal. The structural benchmark path and the ten preserved scenario outputs are unchanged.

@@ -25,7 +25,12 @@ def propagation_arcs(rel: dict[str, Any], profile: str, direction: str):
         elif kind in {"Composition", "Aggregation"}:
             arcs = [(target, source)]  # changed part -> containing whole
         elif kind == "Access":
-            access = (rel.get("properties") or {}).get("accessType", "access")
+            properties = rel.get("properties") or {}
+            # Match the portal's supported representation, including the legacy
+            # `access` property and read/write aliases. Do not drop valid edges.
+            access = str(properties.get("accessType") or properties.get("access") or "access").lower()
+            if access in {"readwrite", "read/write"}:
+                access = "read-write"
             arcs = []
             if access in {"read", "read-write", "access"}:
                 arcs.append((target, source))  # changed data -> reader

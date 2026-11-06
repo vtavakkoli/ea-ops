@@ -51,9 +51,9 @@
   {
     "reviewer": 1,
     "concern": "Archive the evaluated commits with a DOI and publish workflow run IDs.",
-    "response": "The exact commits, original run IDs, recovered CSV/environment artifacts and timeout log are now preserved. A permanent archival deposit has not been completed: a GitHub branch or metadata file is not an archival DOI.",
-    "action": "Open Science section and provenance manifest identify framework run 35993083302 / commit d3ba12e3105b9edbe294d98059e611ccefb8820b and companion run 35990375878 / commit 59fe34511b830f5181e7782d6b9d3fbaf78d9227. Archival metadata/checklist prepared. The author must complete the deposit and insert the issued DOI.",
-    "status": "Partially addressed — archival DOI outstanding"
+    "response": "The EA-Ops preprint is already available on arXiv with DOI 10.48550/arXiv.2609.30593. The exact implementation commits, workflow run IDs, raw CSV/environment artifacts and original timeout log are public. We cite this existing persistent publication record and pinned open artifacts as the preservation provision for this initial engineering contribution. A separate versioned software/data deposit has not been made; the preprint DOI is not presented as a software archive.",
+    "action": "Added the preprint DOI to Open Science, software citation metadata and repository documentation; retained full experiment provenance. A separate software deposit is described as a future preservation option, rather than a new prerequisite imposed by the authors.",
+    "status": "Alternative preservation provision — preprint DOI and pinned open artifacts"
   },
   {
     "reviewer": 2,
@@ -86,8 +86,8 @@
   {
     "reviewer": 3,
     "concern": "Discuss practical use in real organizations.",
-    "response": "A bounded adoption path is outlined: a scoped inventory, stable IDs, accountable owners, explicit mapping, and reviewed updates. This is an adoption proposal; no production deployment or organizational benefit is asserted.",
-    "action": "Practical Implications and integration discussion revised; external-validity limitations and practitioner protocol supplied.",
+    "response": "EA-Ops is an initial open-source engineering contribution. An evaluation by the City of Vienna, Wien Digital (MA 01), is planned as future work. Vahid Tavakkoli serves there as a Senior Enterprise Architect. This professional setting motivates adoption, but no completed City evaluation or measured organizational benefit is claimed.",
+    "action": "Added the professional role to the author biography and the planned City evaluation to practical implications and future work; retained the evaluation limits.",
     "status": "Addressed"
   },
   {
@@ -142,16 +142,16 @@
   {
     "reviewer": 4,
     "concern": "Use a realistic cross-layer repository and clarify synthetic scope.",
-    "response": "Metroville already contains cross-layer business, application, technology, motivation and migration concepts, but is fictional and small. New architecture-state evidence exercises a cross-layer platform change. No real/anonymized organizational model or verified exchange adapter is supplied.",
-    "action": "Original synthetic scope made explicit and fictional-case limits retained. Cross-layer inventory-gap demonstration added.",
-    "status": "Partially addressed — no organizational dataset"
+    "response": "The fictional Metroville model covers business, application, technology, motivation and migration concepts; three architecture states exercise a cross-layer platform change. An evaluation by the City of Vienna (Wien Digital, MA 01) is planned for future work. No real municipal dataset is included in the current benchmark evidence.",
+    "action": "Clarified the initial engineering scope, retained fictional-case limitations, and added the planned organizational evaluation.",
+    "status": "Scope clarified — fictional case now, City evaluation planned"
   },
   {
     "reviewer": 4,
     "concern": "Add a practitioner evaluation and establish stakeholder value.",
-    "response": "No practitioners have been recruited and no usability, effort or governance-value measurements exist. Simulated responses would not address this concern. The manuscript now disclaims those outcomes.",
-    "action": "Prepared a task/counterbalancing protocol and empty observation template. Genuine sessions and an updated analysis are needed if the authors pursue stakeholder-value claims.",
-    "status": "Outstanding external study"
+    "response": "The present article introduces an open-source implementation and reproducible technical evidence as a starting point. A City of Vienna (Wien Digital, MA 01) evaluation is planned as future work. We defer a practitioner/usability study beyond the scope of this initial article and make no claim of measured review-effort reduction or organizational governance benefit. Open availability supports inspection and reuse; it is not treated as evidence of those unmeasured outcomes.",
+    "action": "Repositioned the contribution and claims, added the planned City evaluation, and supplied a practitioner protocol and empty observation template for that later work.",
+    "status": "Addressed through bounded scope and planned future evaluation"
   },
   {
     "reviewer": 4,
@@ -163,9 +163,9 @@
   {
     "reviewer": 4,
     "concern": "Fix timing precision, enlarge Figure 2, condense perfect-score table, state derivation scope, and deposit DOI.",
-    "response": "Timing typography is corrected; one enlarged quality view replaces the four-panel montage. The fault table now maps checks to codes. Matrix lookups validate explicit edges; no derivation engine or complete standards conformance is asserted. The archival DOI remains unavailable.",
-    "action": "Revised figures, fault table, semantic boundary and archival package/checklist.",
-    "status": "Addressed except archival DOI"
+    "response": "Timing typography is corrected; an enlarged quality view replaces the montage. The fault table maps checks to codes, and explicit-edge matrix validation is distinguished from full standards conformance. The existing preprint DOI 10.48550/arXiv.2609.30593 is now cited; no separate versioned software-archive DOI is claimed.",
+    "action": "Revised figures, fault table and semantic boundary; added the persistent preprint citation and explicit software-preservation scope.",
+    "status": "Revised — preprint DOI cited; software-deposit scope stated"
   },
   {
     "reviewer": 5,
@@ -233,8 +233,8 @@
   {
     "reviewer": 6,
     "concern": "Clarify hardware and archive implementation/data.",
-    "response": "All original plots now mark the CPU transition and use medians consistently. Original artifacts and source/run provenance are preserved; the local revision environment is separate. Permanent DOI deposition remains necessary.",
-    "action": "Rebuilt figures and provenance manifest; prepared release metadata, archival checklist and raw evidence.",
-    "status": "Addressed except archival DOI"
+    "response": "Original plots mark the CPU transition and use medians consistently. Original artifacts and source/run provenance are public; the local revision environment is separate. The preprint has DOI 10.48550/arXiv.2609.30593. A distinct versioned software/data DOI has not been minted and is not claimed.",
+    "action": "Rebuilt figures and provenance manifest; cited the existing preprint DOI and retained release metadata for optional later software preservation.",
+    "status": "Revised — hardware/provenance and existing preprint DOI documented"
   }
 ]

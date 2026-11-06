@@ -2,6 +2,9 @@
 
 ## 0.3.0 - revision candidate
 
+- Normalize Access aliases/case and the legacy access property consistently with the portal.
+- Cite the existing preprint DOI and clarify the planned City of Vienna evaluation.
+
 - Index report aggregation and graph reachability while preserving default outputs.
 - Add typed, directed, filtered, bounded, explained impact and snapshot-aware review scope.
 - Add semantic inventory differences for baseline/transition/target review.

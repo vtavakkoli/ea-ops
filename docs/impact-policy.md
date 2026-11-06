@@ -21,6 +21,8 @@ eaops impact snapshots/target --baseline snapshots/baseline --max-depth 3
 | Access: read-write or unspecified `access` | Both directions |
 | Association, Influence, Specialization, other intent links | Excluded from this policy |
 
+Access modes are case-insensitive; `readwrite` and `read/write` are aliases of `read-write`. The legacy `properties.access` field is used when `properties.accessType` is empty or absent, matching the portal.
+
 These directions are explicit review heuristics, not ArchiMate derivation rules. Organizations must assess the policy against their dependency conventions. `--profile dependency` defines direction itself; raw `--direction` is available with the structural profile. Type filters restrict either profile. A depth of zero returns seeds only. Explanations give a shortest-path predecessor and relationship ID, not all possible paths.
 
 Before/after comparison ignores serialization-source fields. Owner/name/description-only edits stay local. Other object changes propagate; changed relationships seed both old and new endpoints. Each state is traversed separately and the results are combined, preserving deleted paths. An object changed only in metadata can still propagate if it is also a changed-relationship endpoint. Rule, configuration, and metamodel changes set `policyReviewRequired`; they do not silently certify any object.
