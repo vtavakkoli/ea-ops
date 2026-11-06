@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from pathlib import Path
 import resource
 import sys
@@ -32,31 +33,42 @@ def _validate_once(model: Path):
     return repo, wall, cpu
 
 
-def run(model: str | Path, repetitions: int, warmups: int, build_repetitions: int) -> list[dict]:
+def run(model: str | Path, repetitions: int, warmups: int, build_repetitions: int,
+        output: Path | None = None, progress: Path | None = None) -> list[dict]:
+    if repetitions < 1 or warmups < 0 or not 0 <= build_repetitions <= repetitions:
+        raise ValueError("require repetitions >= 1, warmups >= 0 and 0 <= build_repetitions <= repetitions")
     model = Path(model)
+    started = time.perf_counter()
+    def event(stage, repetition=0):
+        if progress is not None:
+            progress.parent.mkdir(parents=True, exist_ok=True)
+            with progress.open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps({"stage": stage, "repetition": repetition,
+                                         "elapsed_seconds": time.perf_counter() - started,
+                                         "process_peak_rss_mb": _rss_mb()}) + "\n")
+    def checkpoint():
+        if output is not None and rows:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            temporary = output.with_suffix(output.suffix + ".tmp")
+            with temporary.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+                writer.writeheader()
+                writer.writerows(rows)
+            temporary.replace(output)
     for _ in range(warmups):
+        event("warmup")
         repo, _, _ = _validate_once(model)
         impact(repo, {"app.000000"})
+        del repo
 
     rows = []
     for repetition in range(1, repetitions + 1):
+        event("validation", repetition)
         repo, validation_wall, validation_cpu = _validate_once(model)
 
         impact0 = time.perf_counter()
         impact_result = impact(repo, {"app.000000"})
         impact_wall = time.perf_counter() - impact0
-
-        report_wall = ""
-        portal_wall = ""
-        if repetition <= build_repetitions:
-            with tempfile.TemporaryDirectory() as tmp:
-                report0 = time.perf_counter()
-                render_report(repo, Path(tmp) / "architecture-report.md")
-                report_wall = time.perf_counter() - report0
-                portal0 = time.perf_counter()
-                render_portal(repo, Path(tmp) / "site")
-                portal_wall = time.perf_counter() - portal0
-
         rows.append(
             {
                 "repetition": repetition,
@@ -68,11 +80,29 @@ def run(model: str | Path, repetitions: int, warmups: int, build_repetitions: in
                 "relationships_per_second": f"{len(repo.relationships) / validation_wall:.3f}",
                 "impact_seconds": f"{impact_wall:.9f}",
                 "impact_size": len(impact_result["impacted"]),
-                "report_seconds": f"{report_wall:.9f}" if report_wall != "" else "",
-                "portal_seconds": f"{portal_wall:.9f}" if portal_wall != "" else "",
+                "report_seconds": "",
+                "portal_seconds": "",
                 "peak_rss_mb": f"{_rss_mb():.3f}",
             }
         )
+        checkpoint()  # Preserve completed phases even if publication is terminated.
+        if repetition <= build_repetitions:
+            with tempfile.TemporaryDirectory() as tmp:
+                event("report", repetition)
+                report0 = time.perf_counter()
+                render_report(repo, Path(tmp) / "architecture-report.md")
+                rows[-1]["report_seconds"] = f"{time.perf_counter() - report0:.9f}"
+                rows[-1]["peak_rss_mb"] = f"{_rss_mb():.3f}"
+                checkpoint()
+                event("portal", repetition)
+                portal0 = time.perf_counter()
+                render_portal(repo, Path(tmp) / "site")
+                rows[-1]["portal_seconds"] = f"{time.perf_counter() - portal0:.9f}"
+        rows[-1]["peak_rss_mb"] = f"{_rss_mb():.3f}"
+        checkpoint()
+        event("repetition_complete", repetition)
+        del repo  # Do not count simultaneous old/new repositories on the next load.
+    event("complete", repetitions)
     return rows
 
 
@@ -83,8 +113,10 @@ def main() -> int:
     parser.add_argument("--warmups", type=int, default=3)
     parser.add_argument("--build-repetitions", type=int, default=3)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--progress", help="Append per-phase progress telemetry as JSONL")
     args = parser.parse_args()
-    rows = run(args.model, args.repetitions, args.warmups, args.build_repetitions)
+    rows = run(args.model, args.repetitions, args.warmups, args.build_repetitions,
+               output=Path(args.output), progress=Path(args.progress) if args.progress else None)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as handle:

@@ -1,0 +1,26 @@
+{
+  "status": "completed",
+  "elapsed_seconds": 1.0013431090001177,
+  "observed_child_peak_rss_mb": 23.0546875,
+  "sampling_interval_seconds": 0.5,
+  "pid": 15,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "benchmarks/benchmark.py",
+    "--model",
+    "/workspace/scratch/cef217697809/generated/100",
+    "--warmups",
+    "1",
+    "--repetitions",
+    "3",
+    "--build-repetitions",
+    "3",
+    "--output",
+    "/workspace/scratch/cef217697809/ea-ops/research/revision/results/performance-100.csv",
+    "--progress",
+    "/workspace/scratch/cef217697809/ea-ops/research/revision/results/progress-100.jsonl"
+  ],
+  "returncode": 0,
+  "workflow_run_id": null,
+  "memory_scope": "benchmark child only; Linux VmHWM sampled every 0.5 s"
+}

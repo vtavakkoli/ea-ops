@@ -1,0 +1,23 @@
+{
+  "captured_at_utc": "2026-11-06T14:24:44.156919+00:00",
+  "git_sha": null,
+  "github_run_id": null,
+  "github_run_attempt": null,
+  "runner_os": null,
+  "runner_arch": null,
+  "runner_name": null,
+  "image_os": null,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "memory_mb": 9967,
+  "protocol": {
+    "warmups": 1,
+    "repetitions": 3,
+    "build_repetitions": 3,
+    "seed": 42,
+    "study": "supplemental revision; not a matched-hardware speedup estimate"
+  },
+  "source_git_base": "d3ba12e3105b9edbe294d98059e611ccefb8820b",
+  "source_was_modified": true
+}

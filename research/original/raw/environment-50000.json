@@ -1,0 +1,14 @@
+{
+  "captured_at_utc": "2026-09-24T11:27:41.553586+00:00",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "git_sha": "d3ba12e3105b9edbe294d98059e611ccefb8820b",
+  "github_run_attempt": "1",
+  "github_run_id": "35993083302",
+  "image_os": "ubuntu24",
+  "memory_mb": 15993,
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "runner_arch": "X64",
+  "runner_name": "GitHub Actions 1000005070",
+  "runner_os": "Linux"
+}

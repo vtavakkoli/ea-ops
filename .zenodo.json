@@ -1,0 +1,31 @@
+{
+  "title": "EA-Ops: Git-native enterprise architecture repository validation",
+  "description": "Open-source implementation and reproducible engineering evaluation of EA repository validation. The associated preprint is available under DOI 10.48550/arXiv.2609.30593. A future evaluation by the City of Vienna (Wien Digital, MA 01) is planned; no completed organizational study or separate software-release DOI is claimed.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Tavakkoli, Vahid",
+      "affiliation": "University of Klagenfurt"
+    }
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "enterprise architecture",
+    "architecture as code",
+    "ArchiMate",
+    "repository quality",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/vtavakkoli/ea-ops-example",
+      "relation": "isSupplementedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.48550/arXiv.2609.30593",
+      "relation": "isDescribedBy",
+      "scheme": "doi"
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+[
+  {
+    "reviewer": 1,
+    "concern": "Reframe 240/240 and remove perfect-score headlines; explain trial variation.",
+    "response": "We agree. This is exact error-set agreement for eight specified regression checks, not real-world detection accuracy. Seeds 1–30 vary the generated Association topology; mutation fixtures and rules remain fixed.",
+    "action": "Abstract, Introduction, fault methodology/results, conclusion, and fault-code table revised. The evaluator now fails on any non-exact error set; legacy metric columns remain for compatibility.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 1,
+    "concern": "State impact-set sizes and explain the oracle result.",
+    "response": "The original undirected sets cover 94/100, 979/1,000, 9,781/10,000 and 49,045/50,000 synthetic IDs, and 48–49 IDs in the 65-object case. Oracle equality checks connected-component implementation.",
+    "action": "Abstract, Results, Discussion and Conclusion now state this boundary. New typed/bounded/change-aware policies are evaluated separately; no business-impact accuracy is claimed.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 1,
+    "concern": "Reconcile the report complexity explanation with observed ratios and validation exponents.",
+    "response": "The repeated-scan bound describes one code component, not a fitted growth law. Report ratios of about 225 and 43 exceed the simple 100 and 25 factors; allocation/cache/runtime effects were not instrumented and cannot be attributed. Validation ratios 14.3 and 4.4 do not establish one exponent.",
+    "action": "Results retains those historical measurements, qualifies the explanation, implements one-pass report counts, and adds separately labeled local revision measurements.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 1,
+    "concern": "Correct the number of semantically valid scenarios.",
+    "response": "Seven scenarios have no expected errors; CR04, CR07 and CR08 contain the specified findings.",
+    "action": "Corrected “Eight” to “Seven” in the controlled-change results.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 1,
+    "concern": "Disclose single-type application-heavy scale models and fixed impact seed.",
+    "response": "The scale-growing graph uses ApplicationComponent/Association with two fixed Assignment/Serving fixtures; app.000000 is the impact seed. This is not a balanced enterprise model.",
+    "action": "Synthetic-model methodology and threats state the vocabulary, topology artifact and seed explicitly.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 1,
+    "concern": "Use consistent statistics, mark the hardware break, emphasize n=3, and temper governance claims.",
+    "response": "All original scaling figures now show medians or maximum RSS, without normal-approximation confidence bands. Intel-to-AMD breaks are marked; report/portal n=3 is explicit. Organizational governance was not evaluated.",
+    "action": "Title/abstract repositioned toward EA repository validation. Rebuilt figures from recovered raw CSVs; captions state axis scales and sample sizes.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 1,
+    "concern": "Reframe RQ4; trim unused connector formalism; map faults to codes; define quality score; fix units and references.",
+    "response": "Reproducibility is now a statement. The unused connector set was removed. The quality score is defined as a heuristic and excluded from empirical outcomes. The Kubernetes reference now uses pp. 1–7; the submitted MDDOAI spelling was already consistent and is retained.",
+    "action": "Formalism simplified, fault-code table added, quality formula defined, 627 ms typography fixed, and figure scales stated.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 1,
+    "concern": "Archive the evaluated commits with a DOI and publish workflow run IDs.",
+    "response": "The EA-Ops preprint is already available on arXiv with DOI 10.48550/arXiv.2609.30593. The exact implementation commits, workflow run IDs, raw CSV/environment artifacts and original timeout log are public. We cite this existing persistent publication record and pinned open artifacts as the preservation provision for this initial engineering contribution. A separate versioned software/data deposit has not been made; the preprint DOI is not presented as a software archive.",
+    "action": "Added the preprint DOI to Open Science, software citation metadata and repository documentation; retained full experiment provenance. A separate software deposit is described as a future preservation option, rather than a new prerequisite imposed by the authors.",
+    "status": "Alternative preservation provision — preprint DOI and pinned open artifacts"
+  },
+  {
+    "reviewer": 2,
+    "concern": "Reframe the perfect-score result.",
+    "response": "Agreed. Catalog conformance and repeated topology variants cannot estimate accuracy on arbitrary real EA defects.",
+    "action": "Removed precision/recall/F1 headlines throughout; exact-match regression framing and check-to-code mapping used instead.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 2,
+    "concern": "Implement a report index and re-attempt 100,000 objects.",
+    "response": "The renderer now counts Serving and Access relationships in one pass. Default report output is byte-identical on Metroville. A separate local protocol repeats all stages at sizes through 100,000; it is explicitly distinct from the original hosted 30-repetition experiment.",
+    "action": "Indexed report and adjacency traversal implemented, validated, and measured. Raw revision CSVs, stage progress, resource telemetry and environment are supplied.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 2,
+    "concern": "Make the integration contribution visible against existing AaC and EA tooling.",
+    "response": "The revision acknowledges prior continuous EA pipelines, Git-based Archi collaboration, Structurizr validation/publication, and LeanIX target planning. No unique-invention or cross-tool performance superiority claim is made.",
+    "action": "Added a primary-source capability table and EA maintenance literature; positioned the contribution as this open integration and auditable characterization.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 2,
+    "concern": "Address broad impact sets and the unsupported scale ceiling.",
+    "response": "Legacy component sizes remain reported. Typed and change-aware policies now give distinct candidate sets under explicit heuristics. The historical timeout remains an implementation/protocol limitation; the new local completion cannot be generalized into a production ceiling.",
+    "action": "Added policy table, independent fixed-point checks, before/after snapshot scopes, and separately labeled revision performance results.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 3,
+    "concern": "Discuss practical use in real organizations.",
+    "response": "EA-Ops is an initial open-source engineering contribution. An evaluation by the City of Vienna, Wien Digital (MA 01), is planned as future work. Vahid Tavakkoli serves there as a Senior Enterprise Architect. This professional setting motivates adoption, but no completed City evaluation or measured organizational benefit is claimed.",
+    "action": "Added the professional role to the author biography and the planned City evaluation to practical implications and future work; retained the evaluation limits.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 3,
+    "concern": "Clarify undirected impact limitations.",
+    "response": "Undirected reachability returns components and cannot distinguish business consequences. New dependency and depth-bound semantics are review heuristics with explicit exclusions.",
+    "action": "Design, results and threats revised; policy documentation and per-ID explanations added.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 3,
+    "concern": "Discuss report-generation optimization.",
+    "response": "Repeated per-row full-edge scans were removed. Sorting and the underlying validator/rules still contribute to total report cost.",
+    "action": "Single-pass aggregate counters implemented, report equivalence verified, and supplemental measurements supplied.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 3,
+    "concern": "Explain coexistence with established EA tools.",
+    "response": "Stable IDs, explicit source ownership and model/property/view mappings are prerequisites. Exchange formats and vendor APIs offer integration points, but a lossless adapter and synchronization connector have not been implemented or evaluated.",
+    "action": "Integration section states the proposed route and current limits without implying working vendor connectivity.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Identify the EA body-of-knowledge contribution and use EA maintenance literature.",
+    "response": "The contribution is continuous EA repository and model-quality management. It is not a new EA language, complete governance method, or the first use of continuous delivery for EA.",
+    "action": "Title, abstract, introduction, related work, discussion and conclusion revised; Farwick et al. and Sabau/Hacks/Steffens added from publisher records.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Distinguish data-quality rules from architecture-board governance.",
+    "response": "PR review can carry compliance evidence and an exception request, but boards still own approval, dispensation authority and contracts. Those organizational responsibilities are neither implemented nor evaluated.",
+    "action": "Explicit governance boundary and TOGAF mapping added. Claims narrowed to machine-side repository checks.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Demonstrate baseline, target, transition and gap analysis.",
+    "response": "The new companion demonstration materializes three repositories with stable IDs, explicit Plateau/Gap concepts and a replacement platform. It validates each state and asserts an inventory diff, not target-architecture compliance or business approval.",
+    "action": "Added diff CLI and snapshot-aware impact, run_roadmap.py, all three state snapshots, and gap-analysis.json. Baseline-to-target: one added object, three modified objects, one added and one removed relationship.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Implement directed, relationship-type-aware impact for architecture decisions.",
+    "response": "Serving/Realization/Assignment/Triggering/Flow, part-to-whole containment, and read/write Access propagation are explicitly specified. Association and intent links are excluded. These directions require organizational review and do not prove decision usefulness.",
+    "action": "Implemented dependency policy, raw direction/type filters, depth bounds, predecessor explanations and before/after scope; added hand-written unit fixtures and independent scenario oracles.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Use a realistic cross-layer repository and clarify synthetic scope.",
+    "response": "The fictional Metroville model covers business, application, technology, motivation and migration concepts; three architecture states exercise a cross-layer platform change. An evaluation by the City of Vienna (Wien Digital, MA 01) is planned for future work. No real municipal dataset is included in the current benchmark evidence.",
+    "action": "Clarified the initial engineering scope, retained fictional-case limitations, and added the planned organizational evaluation.",
+    "status": "Scope clarified — fictional case now, City evaluation planned"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Add a practitioner evaluation and establish stakeholder value.",
+    "response": "The present article introduces an open-source implementation and reproducible technical evidence as a starting point. A City of Vienna (Wien Digital, MA 01) evaluation is planned as future work. We defer a practitioner/usability study beyond the scope of this initial article and make no claim of measured review-effort reduction or organizational governance benefit. Open availability supports inspection and reuse; it is not treated as evidence of those unmeasured outcomes.",
+    "action": "Repositioned the contribution and claims, added the planned City evaluation, and supplied a practitioner protocol and empty observation template for that later work.",
+    "status": "Addressed through bounded scope and planned future evaluation"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Clarify what EA-Ops enables compared with existing tools.",
+    "response": "It provides a particular inspectable combination of YAML facts, explicit constraints, Git review and generated evidence. We do not claim a new architect decision unavailable in other tools, nor replacement of broader commercial EA capabilities.",
+    "action": "Capability comparison and contribution-boundary paragraphs added; priority and uniqueness language removed.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 4,
+    "concern": "Fix timing precision, enlarge Figure 2, condense perfect-score table, state derivation scope, and deposit DOI.",
+    "response": "Timing typography is corrected; an enlarged quality view replaces the montage. The fault table maps checks to codes, and explicit-edge matrix validation is distinguished from full standards conformance. The existing preprint DOI 10.48550/arXiv.2609.30593 is now cited; no separate versioned software-archive DOI is claimed.",
+    "action": "Revised figures, fault table and semantic boundary; added the persistent preprint citation and explicit software-preservation scope.",
+    "status": "Revised — preprint DOI cited; software-deposit scope stated"
+  },
+  {
+    "reviewer": 5,
+    "concern": "Differentiate change types and explain large original sets.",
+    "response": "The original component sets are retained. Change-aware scopes now contain 1–28 IDs across ten scenarios: an owner-only edit stays local, while classification, service and platform edits propagate under the declared policy. Scope size is not an accuracy score.",
+    "action": "Added typed, two-hop and change-aware columns, exact policy checks and seed/dangling-ID caveats.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 5,
+    "concern": "Explain what oracle agreement demonstrates.",
+    "response": "Agreement establishes implementation of the stated structural operation, not real-world causal impact or stakeholder usefulness. Both implementations share policy assumptions.",
+    "action": "Correctness framing applied in abstract, methodology, results and conclusion; independent fixed-point reference added for revised policy.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 5,
+    "concern": "Present eight distinct checks rather than 240 independent trials.",
+    "response": "Agreed. The eight fault checks repeat over 30 seed-generated topologies, with fixed mutation fixtures. Determinism means repetition does not create broader defect coverage.",
+    "action": "Simplified results to exact-set agreement and a fault-code table; removed perfect-score emphasis.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 5,
+    "concern": "Compare Archi/coArchi and Structurizr.",
+    "response": "Both are now explicitly represented. Git collaboration and model-as-code publication are established capabilities; comparison is documentation-based rather than a head-to-head benchmark.",
+    "action": "Added capability table with primary-source documentation and no unsupported feature-absence claims.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 5,
+    "concern": "Report elapsed time and memory for the failed 100,000-object run.",
+    "response": "The recovered original log gives approximately 10,760 s from benchmark-step start to cancellation. It contains no process RSS or phase telemetry; those missing observations cannot be reconstructed. The new re-attempt records elapsed time and process high-water RSS, including partial runs.",
+    "action": "Preserved original log, documented unavailable historical memory, and added bounded supervisor, CSV checkpoints, phase JSONL and always-run artifact uploads.",
+    "status": "Historical memory unavailable; new telemetry implemented"
+  },
+  {
+    "reviewer": 6,
+    "concern": "Extend related work on AaC, MDE and recent GenAI.",
+    "response": "The revision adds direct EA maintenance/continuous-delivery antecedents and a 2026 LLM-based EA-debt study. The distinction between probabilistic proposals and deterministic conformance checking is explicit.",
+    "action": "Related Work, comparison and GenAI discussion revised; publisher/author records used for new references.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 6,
+    "concern": "Add a structured comparison across EA tools, IaC, AaC and GenAI.",
+    "response": "The table covers representation/workflow, validation/review, domain, performance-evidence limits and AI role. Different tasks and datasets preclude a shared performance ranking.",
+    "action": "Capability table includes Archi/coArchi, Structurizr, SAP LeanIX, Terraform, prior AaC/MDE, LLM EA analysis, and EA-Ops.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 6,
+    "concern": "Explain practical workflows and GenAI synergies.",
+    "response": "An LLM can propose a patch and the existing gate can check explicit constraints, but a pass cannot validate source facts or strategic fitness. No LLM integration performance is claimed.",
+    "action": "Integration and AI-Assisted Proposals subsection and adoption limitations added.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 6,
+    "concern": "Improve report performance and discuss typed impact.",
+    "response": "Report counts are indexed, default reachability uses adjacency, and typed/depth-bounded/change-aware policies are implemented and checked. Total pipeline costs and heuristic impact limits remain explicit.",
+    "action": "Implementation, tests, independent scenario checks and separate local scaling evidence supplied.",
+    "status": "Addressed"
+  },
+  {
+    "reviewer": 6,
+    "concern": "Clarify hardware and archive implementation/data.",
+    "response": "Original plots mark the CPU transition and use medians consistently. Original artifacts and source/run provenance are public; the local revision environment is separate. The preprint has DOI 10.48550/arXiv.2609.30593. A distinct versioned software/data DOI has not been minted and is not claimed.",
+    "action": "Rebuilt figures and provenance manifest; cited the existing preprint DOI and retained release metadata for optional later software preservation.",
+    "status": "Revised — hardware/provenance and existing preprint DOI documented"
+  }
+]

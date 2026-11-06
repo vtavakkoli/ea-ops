@@ -1,0 +1,6 @@
+{
+  "sample": "Metroville baseline, 65 objects / 85 relationships",
+  "original_commit": "d3ba12e3105b9edbe294d98059e611ccefb8820b",
+  "exact_byte_equality": true,
+  "sha256": "0f147964381808711e00596bef6818c7729423d342c5e26b0238d78b17b2df7a"
+}

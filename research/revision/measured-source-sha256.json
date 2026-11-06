@@ -1,0 +1,15 @@
+{
+  "scope": "source used for supplemental performance runs; version metadata not a measured behavior",
+  "files": {
+    "src/eaops/core.py": "ed00aa72e50f95dd63cd240e85cc204667038c44b19286560f27aa990218b665",
+    "src/eaops/render.py": "3d77026a480d9ae93d73d18be2bc685b9e1f44902f10d12189bc412487bc35c2",
+    "src/eaops/graph.py": "7027d5c78c6f61c982693d60683fdd9f31e576d5c137c65edabce52d9318c398",
+    "src/eaops/compare.py": "d33d830669c01ab112dac5a4fa26adc9f10acd319625b7474fabb72ab42eb853",
+    "src/eaops/repository_portal.py": "9bff8e3fa3263a03c99e8960aa939fc74f6ded8f92e0e49a20c7337761a9415e",
+    "benchmarks/benchmark.py": "d9ebd8c004b482fb5de9ed8d1264d37f2ad206eed2ade0452dfd0cc196fa9ec8",
+    "benchmarks/generate_model.py": "b1f255183066ec1c34dc97effc976cee43a300dedf90f2c1a6aff4d3059d9460"
+  },
+  "measurement_note": "Final revision source hashes. During the experiment, a max_depth type guard was tightened (all performance calls use max_depth=None) and package version metadata changed from 0.2.0 to 0.3.0. Performance-path logic and the safe YAML loader were unchanged. The initial graph source variant is separately identified.",
+  "initial_graph_variant_sha256": "47a6bc0b5250b7a3b67a537b9c9657ec22b14532b0b27a6ea7441cfebee8db5d",
+  "post_benchmark_change": "Access-mode normalization was added after the measurements; it affects the optional dependency policy. The preserved performance experiment uses the unchanged structural profile. The ten scenario CSV outputs remain byte-identical."
+}

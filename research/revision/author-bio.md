@@ -1,0 +1,3 @@
+# Vahid Tavakkoli — author biography
+
+Vahid Tavakkoli received the M.Sc. degree from Carinthia University of Applied Sciences, Austria, and the Dr. techn. degree from the University of Klagenfurt, Austria. He is a Senior Enterprise Architect with the City of Vienna, Wien Digital (Municipal Department 01, MA 01), and is affiliated with the Department of Smart Systems Technologies, University of Klagenfurt. His research interests include artificial intelligence, machine learning, distributed and multi-agent systems, autonomous systems, enterprise architecture, and reproducible computational methods.
