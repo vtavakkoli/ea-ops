@@ -96,6 +96,17 @@ def render_report(repo: RepositoryModel, output_file: str | Path) -> Path:
     processes = [o for o in repo.objects.values() if o.get("type") == "BusinessProcess"]
     data_objects = [o for o in repo.objects.values() if o.get("type") in {"DataObject", "BusinessObject"}]
     applications = [o for o in repo.objects.values() if o.get("type") == "ApplicationComponent"]
+    # One edge pass replaces a complete relationship scan for every table row.
+    support, data_used, data_usage, supported_processes = (Counter() for _ in range(4))
+    for rel in repo.relationships.values():
+        source, target = rel.get("source"), rel.get("target")
+        if rel.get("type") == "Serving":
+            support[target] += 1
+            if repo.objects.get(target, {}).get("type") == "BusinessProcess":
+                supported_processes[source] += 1
+        elif rel.get("type") == "Access":
+            data_used[source] += 1
+            data_usage[target] += 1
 
     def p(o, key, default="—"):
         return (o.get("properties") or {}).get(key, default)
@@ -111,16 +122,14 @@ def render_report(repo: RepositoryModel, output_file: str | Path) -> Path:
         "|---|---|---|---|---:|---:|",
     ]
     for proc in sorted(processes, key=lambda x: x.get("name", "")):
-        support = [r for r in repo.relationships.values() if r.get("type") == "Serving" and r.get("target") == proc.get("id")]
-        data_used = [r for r in repo.relationships.values() if r.get("type") == "Access" and r.get("source") == proc.get("id")]
-        lines.append(f"| {proc.get('name','')} | {p(proc,'owner')} | {p(proc,'criticality')} | {p(proc,'lifecycle')} | {len(support)} | {len(data_used)} |")
+        lines.append(f"| {proc.get('name','')} | {p(proc,'owner')} | {p(proc,'criticality')} | {p(proc,'lifecycle')} | {support[proc.get('id')]} | {data_used[proc.get('id')]} |")
     lines += ["", "## Data & Information Repository", "", "| Information object | Type | Owner | Classification | Process usage |", "|---|---|---|---|---:|"]
     for item in sorted(data_objects, key=lambda x: x.get("name", "")):
-        use_count = sum(1 for r in repo.relationships.values() if r.get("type") == "Access" and r.get("target") == item.get("id"))
+        use_count = data_usage[item.get("id")]
         lines.append(f"| {item.get('name','')} | {item.get('type','')} | {p(item,'owner')} | {p(item,'classification','unclassified')} | {use_count} |")
     lines += ["", "## Application Portfolio", "", "| Application | Owner | Lifecycle | Tier | Processes supported |", "|---|---|---|---|---:|"]
     for app in sorted(applications, key=lambda x: x.get("name", "")):
-        proc_count = sum(1 for r in repo.relationships.values() if r.get("type") == "Serving" and r.get("source") == app.get("id") and repo.objects.get(r.get("target"), {}).get("type") == "BusinessProcess")
+        proc_count = supported_processes[app.get("id")]
         lines.append(f"| {app.get('name','')} | {p(app,'owner')} | {p(app,'lifecycle')} | {p(app,'tier')} | {proc_count} |")
     lines += ["", "## Catalog by Type", "", "| Type | Count |", "|---|---:|"]
     lines += [f"| {t} | {n} |" for t, n in sorted(by_type.items())]

@@ -1,0 +1,52 @@
+[
+  {
+    "objects": 100,
+    "relationships": 200,
+    "validation_s": 0.091340071,
+    "impact_ms": 0.300855,
+    "report_s": 0.001017897,
+    "portal_s": 0.001625356,
+    "peak_rss_mb": 23.055,
+    "total_benchmark_elapsed_s": 1.0013431090001177
+  },
+  {
+    "objects": 1000,
+    "relationships": 2000,
+    "validation_s": 0.942577657,
+    "impact_ms": 3.1933629999999997,
+    "report_s": 0.007561101,
+    "portal_s": 0.014046688,
+    "peak_rss_mb": 37.027,
+    "total_benchmark_elapsed_s": 4.005237424999905
+  },
+  {
+    "objects": 10000,
+    "relationships": 20000,
+    "validation_s": 10.333188171,
+    "impact_ms": 67.128044,
+    "report_s": 0.155937094,
+    "portal_s": 0.229563959,
+    "peak_rss_mb": 181.023,
+    "total_benchmark_elapsed_s": 44.56592221999995
+  },
+  {
+    "objects": 50000,
+    "relationships": 100000,
+    "validation_s": 56.929368683,
+    "impact_ms": 498.958298,
+    "report_s": 0.898611477,
+    "portal_s": 1.246647768,
+    "peak_rss_mb": 759.578,
+    "total_benchmark_elapsed_s": 241.89605010499986
+  },
+  {
+    "objects": 100000,
+    "relationships": 200000,
+    "validation_s": 118.78276875,
+    "impact_ms": 1066.253906,
+    "report_s": 1.99460409,
+    "portal_s": 2.897837318,
+    "peak_rss_mb": 1461.949,
+    "total_benchmark_elapsed_s": 484.2701874239999
+  }
+]

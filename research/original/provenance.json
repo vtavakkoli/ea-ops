@@ -1,0 +1,32 @@
+{
+  "framework_commit": "d3ba12e3105b9edbe294d98059e611ccefb8820b",
+  "framework_run_id": 35993083302,
+  "framework_run_url": "https://github.com/vtavakkoli/ea-ops/actions/runs/35993083302",
+  "companion_commit": "59fe34511b830f5181e7782d6b9d3fbaf78d9227",
+  "companion_run_id": 35990375878,
+  "companion_run_url": "https://github.com/vtavakkoli/ea-ops-example/actions/runs/35990375878",
+  "historical_100000": {
+    "status": "cancelled after CI budget",
+    "benchmark_step_elapsed_seconds": 10760.1026,
+    "peak_process_rss_mb": null,
+    "memory_reason": "not collected before cancellation; cannot reconstruct"
+  },
+  "files": {
+    "accuracy-invalid_lifecycle.csv": "bc3d70da700056c4ca980a9abef4534fd58f32313e3b9b87823ad5a9818fb80c",
+    "performance-100.csv": "b9b04921c7fd73227fe3545efe97d5d34b214aefeedd834c93aa2f090974dd2d",
+    "accuracy-dangling_source.csv": "a5d6dafa1a44d2f59819d08c2c92865bfdd9b9a1d31a7e28225bb0ae9504f0e7",
+    "environment-1000.json": "ea6d7c7e88c362f2d6023d6b106df34fd0b3e0ed8605d940e0f6d4bf3aa2f794",
+    "accuracy-dangling_target.csv": "77e1dd43b82d1d9d3339b095bb3de35ebd07deb6b4767c893c35712f86d6dd9b",
+    "performance-1000.csv": "d978b5f43a820779b1a699a32d6d46564e5049d874f4d954f189ffe8eeb466c8",
+    "accuracy-missing_owner.csv": "b4a7a6fe11a5b151e0d211b917b483b271670ec6f54a94b593832a95c6a0e99e",
+    "accuracy-duplicate_id.csv": "8fe2ff58828107064471fff19e1c19395709fc78a5edbf50c19d9c3bbb7c6558",
+    "accuracy-invalid_archimate_relationship.csv": "6ee80603de4f1e95d4a64dd73b4ce0920e1238e9b473d8a3ef188ebf3c7c2a57",
+    "performance-50000.csv": "8ae5e14237b5293e2712ce90e99444ae9eae60cb6ab7517077f40eb89a761158",
+    "accuracy-missing_criticality.csv": "ff156814cb5334972d8678cd8ca5840024cb44b83bfb853898e638bdb63f5534",
+    "accuracy-governance_violation.csv": "3efa350b1d7220b829f1ce8bd5812386349898fd042b6c080a10e807de8a8de7",
+    "environment-10000.json": "645e3ddd8cdff20d9cb320e0cc3d259ee91c8d7abacbf661a6b770ffa5938fc1",
+    "environment-100.json": "d8f1ba2a9fc8f4b4072c359ba5ba2d4bc4d9ae5c19a104dd2e55d86a52f9357f",
+    "environment-50000.json": "f33465de00082024af046f872a6a1a7ad6407a826a3dabb8d982e2eeb4d7b276",
+    "performance-10000.csv": "35a974e392bbb93088074e1eb9d42279fc835f421ee6dac81bf097316fce39a2"
+  }
+}

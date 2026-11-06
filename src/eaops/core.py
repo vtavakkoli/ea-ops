@@ -338,25 +338,9 @@ def metrics(repo: RepositoryModel, issues: list[Issue] | None = None) -> dict[st
     }
 
 
-def impact(repo: RepositoryModel, changed_ids: set[str]) -> dict[str, Any]:
-    impacted = set(changed_ids)
-    frontier = set(changed_ids)
-    while frontier:
-        nxt = set()
-        for rel in repo.relationships.values():
-            s, t = rel.get("source"), rel.get("target")
-            if s in frontier and t not in impacted:
-                nxt.add(t)
-            if t in frontier and s not in impacted:
-                nxt.add(s)
-        impacted |= nxt
-        frontier = nxt
-    by_type = {}
-    for oid in impacted:
-        if oid in repo.objects:
-            typ = repo.objects[oid].get("type", "Unknown")
-            by_type[typ] = by_type.get(typ, 0) + 1
-    return {"changed": sorted(changed_ids), "impacted": sorted(impacted), "byType": dict(sorted(by_type.items()))}
+def impact(repo: RepositoryModel, changed_ids: set[str], **options: Any) -> dict[str, Any]:
+    from .graph import indexed_impact
+    return indexed_impact(repo, changed_ids, **options)
 
 
 def changed_object_ids(repo: RepositoryModel, base: str = "HEAD~1") -> set[str]:

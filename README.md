@@ -2,7 +2,7 @@
 
 # EA-Ops
 
-**Git-native Enterprise Architecture Operations — model, validate, review, govern, and publish architecture as code.**
+**Git-native enterprise architecture repository validation — model, validate, review, and publish architecture as code.**
 
 EA-Ops brings the operating model of modern engineering to Enterprise Architecture. Architecture facts live in Git as simple YAML objects and relationships. Deterministic rules validate the model. Pull requests become architecture change requests. `main` represents the approved architecture. The same source generates an interactive architecture portal and architecture-quality report.
 
@@ -265,3 +265,9 @@ The canonical experiment is [`.github/workflows/research-evaluation.yml`](.githu
 Fault injection and ground-truth generation are deliberately separated from the EA-Ops validator implementation. Generated models and raw results are not committed; they are deterministically regenerated from documented seeds.
 
 See [benchmarks/README.md](benchmarks/README.md) for the methodology, metrics, cloud-runner limitations, and local reproduction commands.
+
+## IEEE Access revision candidate
+
+The 0.3.0 revision candidate adds indexed report aggregation, adjacency-based structural impact, typed/directional/depth-bounded queries, and semantic snapshot differences. [Impact policy](docs/impact-policy.md) defines the heuristics and their limits. [Revision evidence](research/revision/README.md) separates the original hosted experiment from the new local measurements.
+
+Eight injected checks over 30 seeded topology variants are exact-match regression tests, not real-world detection accuracy. Graph oracle agreement establishes implementation correctness under a declared policy. EA-Ops validates explicit relationship compatibility; it does not compute ArchiMate derivations or establish full standards conformance or organizational governance effectiveness.

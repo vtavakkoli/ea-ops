@@ -55,8 +55,15 @@ jobs:
         run: python benchmarks/environment.py --output results/raw/environment-${{ matrix.objects }}.json
       - name: Run performance experiment
         run: |
-          python benchmarks/benchmark.py             --model generated/model-${{ matrix.objects }}             --warmups 3             --repetitions "$RESEARCH_REPETITIONS"             --build-repetitions "$BUILD_REPETITIONS"             --output results/raw/performance-${{ matrix.objects }}.csv
+          python benchmarks/run_bounded.py --deadline-seconds 9000 \
+            --telemetry results/raw/resource-${{ matrix.objects }}.json -- \
+            python benchmarks/benchmark.py --model generated/model-${{ matrix.objects }} \
+            --warmups 3 --repetitions "$RESEARCH_REPETITIONS" \
+            --build-repetitions "$BUILD_REPETITIONS" \
+            --progress results/raw/progress-${{ matrix.objects }}.jsonl \
+            --output results/raw/performance-${{ matrix.objects }}.csv
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: performance-${{ matrix.objects }}
           path: results/raw/
@@ -99,10 +106,11 @@ jobs:
             python benchmarks/generate_model.py --objects 100 --seed "$seed" --output "generated/clean-${trial}"
             python benchmarks/inject_faults.py               --model "generated/clean-${trial}"               --fault "${{ matrix.fault }}"               --output "generated/faults/${{ matrix.fault }}/trial-${trial}"
           done
-      - name: Evaluate precision recall and F1
+      - name: Check exact regression error sets
         run: |
-          python benchmarks/evaluate_accuracy.py             --root "generated/faults/${{ matrix.fault }}"             --minimum-f1 0.99             --output "results/raw/accuracy-${{ matrix.fault }}.csv"
+          python benchmarks/evaluate_accuracy.py             --root "generated/faults/${{ matrix.fault }}"             --output "results/raw/accuracy-${{ matrix.fault }}.csv"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: accuracy-${{ matrix.fault }}
           path: results/raw/
@@ -112,6 +120,7 @@ jobs:
     name: Publication tables and figures
     runs-on: ubuntu-latest
     needs: [performance, accuracy]
+    if: always()
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -138,6 +147,7 @@ jobs:
           cp benchmarks/README.md results/METHODOLOGY.md
           tar -czf ea-ops-research-results.tar.gz results/
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: ieee-evaluation-results
           path: |

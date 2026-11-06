@@ -1,0 +1,32 @@
+{
+  "unit_tests": {
+    "passed": 26,
+    "failed": 0
+  },
+  "wheel_build": "ea_ops-0.3.0-py3-none-any.whl built successfully",
+  "metroville_scenarios": {
+    "passed": 10,
+    "oracles": "legacy BFS; typed/bounded fixed point; change-aware before/after"
+  },
+  "roadmap_states": {
+    "validated": 3,
+    "baseline_to_target": "1 added object, 3 modified objects, 1 added / 1 removed relationship"
+  },
+  "report_equivalence": "byte-identical to evaluated original on Metroville baseline",
+  "supplemental_sizes": [
+    100,
+    1000,
+    10000,
+    50000,
+    100000
+  ],
+  "supplemental_protocol": {
+    "warmups": 1,
+    "measured_repetitions": 3,
+    "publication_repetitions": 3
+  },
+  "external_evidence_pending": [
+    "archival DOI",
+    "genuine practitioner evaluation / organizational dataset if claimed"
+  ]
+}

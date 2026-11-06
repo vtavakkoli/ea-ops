@@ -1,0 +1,9 @@
+{
+  "title": "EA-Ops: Git-native enterprise architecture repository validation",
+  "description": "Open-source implementation and reproducible evaluation of typed architecture facts, declarative rule checks, structural review policies, and generated publication. Revision candidate; no practitioner results or DOI are asserted by this metadata file.",
+  "upload_type": "software",
+  "creators": [{"name": "Tavakkoli, Vahid", "affiliation": "University of Klagenfurt"}],
+  "license": "Apache-2.0",
+  "keywords": ["enterprise architecture", "architecture as code", "ArchiMate", "repository quality", "reproducibility"],
+  "related_identifiers": [{"identifier": "https://github.com/vtavakkoli/ea-ops-example", "relation": "isSupplementedBy", "scheme": "url"}]
+}

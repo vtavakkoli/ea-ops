@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Tavakkoli
     given-names: Vahid
-version: 0.2.0
+version: 0.3.0
 license: Apache-2.0
 repository-code: "https://github.com/vtavakkoli/ea-ops"
 url: "https://vtavakkoli.github.io/ea-ops/"

@@ -42,6 +42,7 @@ def aggregate_accuracy(input_dir: Path, output_dir: Path) -> list[dict]:
                 "tp": tp,
                 "fp": fp,
                 "fn": fn,
+                "exact_matches": sum(int(r["fp"]) == 0 and int(r["fn"]) == 0 for r in rows),
                 "precision": f"{precision:.6f}",
                 "recall": f"{recall:.6f}",
                 "f1": f"{f1:.6f}",
@@ -80,6 +81,8 @@ def aggregate_performance(input_dir: Path, output_dir: Path) -> tuple[list[dict]
                 "peak_rss_mb_max": f"{max(memory):.2f}",
                 "report_median_s": f"{report['median']:.6f}",
                 "portal_median_s": f"{portal['median']:.6f}",
+                "report_repetitions": report["n"],
+                "portal_repetitions": portal["n"],
             }
         )
         impact_table.append(
@@ -97,18 +100,31 @@ def aggregate_performance(input_dir: Path, output_dir: Path) -> tuple[list[dict]
     return scalability, impact_table
 
 
-def figures(scalability: list[dict], impact_table: list[dict], output_dir: Path) -> None:
+def figures(scalability: list[dict], impact_table: list[dict], output_dir: Path, input_dir: Path | None = None) -> None:
     import matplotlib.pyplot as plt
 
     figure_dir = output_dir / "figures"
     figure_dir.mkdir(parents=True, exist_ok=True)
     xs = [int(r["objects"]) for r in scalability]
+    hardware = {}
+    if input_dir is not None:
+        for path in input_dir.glob("environment-*.json"):
+            try:
+                hardware[int(path.stem.split("-")[-1])] = json.loads(path.read_text()).get("cpu", "unknown")
+            except (ValueError, KeyError):
+                continue
+    def hardware_breaks(ax):
+        for first, second in zip(xs, xs[1:]):
+            if hardware.get(first) and hardware.get(second) and hardware[first] != hardware[second]:
+                ax.axvline((first * second) ** 0.5, linestyle="--", color="gray")
+                ax.text(0.02, 1.02, "CPU changes between scale tiers", transform=ax.transAxes, fontsize=8)
 
     fig, ax = plt.subplots()
     ax.plot(xs, [float(r["validation_median_s"]) for r in scalability], marker="o")
     ax.set_xscale("log")
     ax.set_xlabel("Architecture objects")
     ax.set_ylabel("Median validation time (s)")
+    hardware_breaks(ax)
     ax.grid(True, alpha=0.25)
     fig.tight_layout()
     fig.savefig(figure_dir / "Figure-validation-runtime.pdf")
@@ -119,6 +135,7 @@ def figures(scalability: list[dict], impact_table: list[dict], output_dir: Path)
     ax.set_xscale("log")
     ax.set_xlabel("Architecture objects")
     ax.set_ylabel("Peak RSS (MB)")
+    hardware_breaks(ax)
     ax.grid(True, alpha=0.25)
     fig.tight_layout()
     fig.savefig(figure_dir / "Figure-memory.pdf")
@@ -129,6 +146,7 @@ def figures(scalability: list[dict], impact_table: list[dict], output_dir: Path)
     ax.set_xscale("log")
     ax.set_xlabel("Architecture objects")
     ax.set_ylabel("Median impact-analysis time (ms)")
+    hardware_breaks(ax)
     ax.grid(True, alpha=0.25)
     fig.tight_layout()
     fig.savefig(figure_dir / "Figure-impact-runtime.pdf")
@@ -143,7 +161,7 @@ def main() -> int:
     input_dir, output_dir = Path(args.input), Path(args.output)
     accuracy = aggregate_accuracy(input_dir, output_dir)
     scalability, impact_table = aggregate_performance(input_dir, output_dir)
-    figures(scalability, impact_table, output_dir)
+    figures(scalability, impact_table, output_dir, input_dir)
     write_json(
         output_dir / "summary" / "summary.json",
         {

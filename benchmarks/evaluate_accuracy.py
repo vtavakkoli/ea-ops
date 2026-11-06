@@ -43,6 +43,7 @@ def evaluate(root: str | Path) -> tuple[list[dict], dict[str, float | int]]:
                 "recall": f"{recall:.6f}",
                 "f1": f"{f1:.6f}",
                 "actual_error_count": len(actual),
+                "exact_match": str(actual == expected).lower(),
             }
         )
         total_tp += tp
@@ -52,11 +53,13 @@ def evaluate(root: str | Path) -> tuple[list[dict], dict[str, float | int]]:
     precision = total_tp / (total_tp + total_fp) if total_tp + total_fp else 1.0
     recall = total_tp / (total_tp + total_fn) if total_tp + total_fn else 1.0
     f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-    return rows, {"tp": total_tp, "fp": total_fp, "fn": total_fn, "precision": precision, "recall": recall, "f1": f1}
+    return rows, {"trials": len(rows), "exact_matches": sum(r["exact_match"] == "true" for r in rows),
+                  "fault_classes": len({r["fault_type"] for r in rows}),
+                  "tp": total_tp, "fp": total_fp, "fn": total_fn, "precision": precision, "recall": recall, "f1": f1}
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Evaluate EA-Ops fault-detection precision, recall and F1.")
+    parser = argparse.ArgumentParser(description="Check exact error-tuple agreement for the injected regression catalog.")
     parser.add_argument("--root", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--minimum-f1", type=float, default=0.99)
@@ -64,6 +67,8 @@ def main() -> int:
     rows, totals = evaluate(args.root)
     write_csv(args.output, rows)
     print(json.dumps(totals, indent=2))
+    if totals["exact_matches"] != totals["trials"]:
+        raise SystemExit("Regression failure: at least one emitted error set differs from its manifest")
     if float(totals["f1"]) < args.minimum_f1:
         raise SystemExit(f"F1 {totals['f1']:.6f} is below minimum {args.minimum_f1:.6f}")
     return 0
